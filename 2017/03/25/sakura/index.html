@@ -138,9 +138,7 @@
     </div>
     <!-- 二维码 END -->
     
-      <!-- Gitment START -->
-      <div id="comments"></div>
-      <!-- Gitment END -->
+      <!-- No Comment -->
     
   </article>
   <!-- Article END -->
@@ -213,15 +211,15 @@
     });
 
     // gitment
-    var gitmentConfig = "yanm1ng";
+    var gitmentConfig = "undefined";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "Sakura",
-        owner: "yanm1ng",
-        repo: "yanm1ng.github.io",
+        owner: "undefined",
+        repo: "undefined",
         oauth: {
-          client_id: "0f87e490e00ee3fd87ef",
-          client_secret: "4a9d2b148e7971c2201ad12131ce8bf8159ccd2e"
+          client_id: "undefined",
+          client_secret: "undefined"
         },
         theme: {
           render(state, instance) {
