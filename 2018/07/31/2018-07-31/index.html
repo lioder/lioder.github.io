@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Kry·L&#39;s Playground">
+  <meta name="keyword" content="blog">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      JWT 与 登录保持（一） | Time Lapse
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Time Lapse</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/gallery/" class="item-link">Gallery</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/gallery/" class="menu-link">Gallery</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>JWT 与 登录保持（一）</h2>
+  <p class="post-date">2018-07-31</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
+<p>具体可参考阮一峰老师对<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="external">JWT</a>的介绍, 下面主要谈一下登录保持。</p>
+<a id="more"></a> 
+<h2 id="2-登录保持"><a href="#2-登录保持" class="headerlink" title="2. 登录保持"></a>2. 登录保持</h2><h3 id="2-1-需求"><a href="#2-1-需求" class="headerlink" title="2.1 需求"></a>2.1 需求</h3><blockquote>
+<p>用户通过帐号和密码登录，登录后在很长一段时间（e.g. 3天）内可以保持登录状态。即使用户关闭浏览器后，在若干小时后打开页面依然可以直接进入服务，而不需要重新登录。当用户隔较长时间（e.g. &gt;3天）未登录时，再次登录需要重新输入帐号和密码。</p>
+</blockquote>
+<h3 id="2-2-思路"><a href="#2-2-思路" class="headerlink" title="2.2 思路"></a>2.2 思路</h3><ol>
+<li><p>使用单个 token</p>
+<p>每次传到服务器时，判断一下过期时间。例如有效时间是3天，当检测到还剩1h token 就要失效时，就将创建一个新 token 返回给浏览器</p>
+<blockquote>
+<p>存在的问题：</p>
+<ol>
+<li>由于要实现3天内免登录，token的有效时间就要设为3天。</li>
+</ol>
+<p>较长的有效时间带来了较低的安全性。</p>
+<ol>
+<li>剩余时间难以预测。假如设定的剩余时间是1h，用户很小概率恰好在失效前的最后一小时还在使用服务。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>使用accessToken与refreshToken</p>
+<p>accessToken用来进行访问控制，它的有效时间很短，安全性更好。</p>
+<p>refreshToken用来更新accessToken，它的有效时间很长。</p>
+<p>当accessToken过期时，就用refreshToken重新获取accessToken。</p>
+<p>当refreshToken也过期时，就需要重新登录。</p>
+<blockquote>
+<p>优点：因为refreshToken存储在服务器中，所以管理人员可以删除某个refreshToken来剔除恶劣用户。</p>
+<p>缺点：失去了无状态，服务器需要存储refreshToken。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="2-3-实现"><a href="#2-3-实现" class="headerlink" title="2.3 实现"></a>2.3 实现</h3><blockquote>
+<p>为了简化表述，存储改为在内存中存储，生产环境中请使用数据库</p>
+</blockquote>
+<p>启动一个 nodejs 服务器，这里使用Koa框架。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<p>初始化登录路由，获得用户名和密码后，向浏览器发放accessToken和refreshToken。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</div><div class="line"></div><div class="line"><span class="comment">/* 下面是增加的代码 */</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>);</div><div class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)</div><div class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">'jsonwebtoken'</span>);</div><div class="line"><span class="keyword">const</span> jwtKoa = <span class="built_in">require</span>(<span class="string">'koa-jwt'</span>);</div><div class="line"><span class="keyword">let</span> randtoken = <span class="built_in">require</span>(<span class="string">'rand-token'</span>);</div><div class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> verify = util.promisify(jwt.verify);</div><div class="line"><span class="keyword">let</span> refreshTokens = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line"><span class="keyword">const</span> secret = <span class="string">'jwt_demo'</span>;</div><div class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</div><div class="line"></div><div class="line">app.use(bodyParser());</div><div class="line">app.use(jwtKoa(&#123;secret&#125;).unless(&#123;</div><div class="line">    <span class="attr">path</span>: [<span class="regexp">/^\/api\/login/</span>, /^\/api\/token/] <span class="comment">/* 排除/api/login 路径 和/api/token 路径 */</span></div><div class="line">&#125;));</div><div class="line"></div><div class="line">router.post(<span class="string">'/api/login'</span>, <span class="keyword">async</span>(ctx, next) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> user = ctx.request.body;</div><div class="line">    <span class="keyword">if</span> (user &amp;&amp; user.name) &#123;</div><div class="line">        <span class="keyword">let</span> info = &#123;</div><div class="line">            <span class="attr">name</span>: user.name</div><div class="line">        &#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">const</span> accessToken = jwt.sign(info, secret, &#123; <span class="attr">expiresIn</span>: <span class="string">'15m'</span>&#125;); <span class="comment">/* 生成accessToken，有效期为15分钟 */</span></div><div class="line">        <span class="keyword">const</span> refreshToken = randtoken.uid(<span class="number">16</span>); <span class="comment">/* 获取16位refreshToken */</span></div><div class="line">        refreshTokens.set(refreshToken, user.name);</div><div class="line">        ctx.response.body = &#123;</div><div class="line">            <span class="attr">accessToken</span>: accessToken,</div><div class="line">            <span class="attr">refreshToken</span>: refreshToken</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(router.routes())</div><div class="line">    .use(router.allowedMethods());</div><div class="line"></div><div class="line"><span class="comment">/* 新增代码到此结束 */</span></div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<p>初始化accessToken刷新路由。浏览器发送refreshToken，服务器验证如果map中持有该refreshToken且对应的username与发送过来的username匹配，那么就发送新的token。否则返回401错误状态。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">router.post(<span class="string">'/api/token'</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> username = ctx.request.body.name;</div><div class="line">    <span class="keyword">const</span> refreshToken = ctx.request.body.refreshToken;</div><div class="line">    <span class="keyword">if</span> (refreshTokens.has(refreshToken) &amp;&amp; refreshTokens.get(refreshToken) === username) &#123;</div><div class="line">        <span class="keyword">let</span> info = &#123;</div><div class="line">            <span class="attr">name</span>: username</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">let</span> accessToken = jwt.sign(info, secret, &#123; <span class="attr">expiresIn</span>: <span class="string">'15m'</span> &#125;);</div><div class="line">        ctx.body = &#123;</div><div class="line">            <span class="attr">accessToken</span>: accessToken</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">/* 401 没有权限访问，需要重新登录 */</span></div><div class="line">        ctx.throw(<span class="number">401</span>); </div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>初始化一个保护的资源访问路径</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">router.get(<span class="string">'/api/secret'</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;</div><div class="line">	<span class="keyword">const</span> token = ctx.header.authorization; <span class="comment">/* 获得accessToken */</span></div><div class="line">    <span class="keyword">if</span> (token) &#123;</div><div class="line">        <span class="keyword">let</span> accessToken = token.split(<span class="string">' '</span>)[<span class="number">1</span>];</div><div class="line">        <span class="keyword">let</span> accessPayload = <span class="keyword">await</span> verify(accessToken, secret); <span class="comment">/* 解密，获取accessPayload */</span></div><div class="line">        ctx.body = <span class="string">"It's a secret."</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        ctx.body = &#123;</div><div class="line">            <span class="attr">message</span>: <span class="string">'token 错误'</span>,</div><div class="line">            <span class="attr">code</span>: <span class="number">-1</span></div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-4-验证"><a href="#2-4-验证" class="headerlink" title="2.4 验证"></a>2.4 验证</h3><ol>
+<li><p>用name登录，获取一个accessToken</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -d &quot;name=foo&quot; http://127.0.0.1:3000/api/login</div></pre></td></tr></table></figure>
+<p>返回值如下（不一定全部相同）：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">"accessToken"</span>:<span class="string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span>,<span class="attr">"refreshToken"</span>:<span class="string">"SPeAsKMcbHqjBrQ5"</span>&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>不带token访问保护资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl  http://127.0.0.1:3000/api/secret</div></pre></td></tr></table></figure>
+<p>返回值如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Authentication Error</div></pre></td></tr></table></figure>
+</li>
+<li><p>带token访问保护资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE&quot; http://127.0.0.1:3000/api/secret</div></pre></td></tr></table></figure>
+<p>返回值如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">It&apos;s a secret.</div></pre></td></tr></table></figure>
+</li>
+<li><p>15分钟后带token访问保护资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -H &quot;Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE&quot; http://127.0.0.1:3000/api/secret</div></pre></td></tr></table></figure>
+<p>返回值如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Authentication Error</div></pre></td></tr></table></figure>
+</li>
+<li><p>用refreshToken换accessToken</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -d &quot;name=foo&amp;refreshToken=3VqXxVFaFequGZEt&quot; http://127.0.0.1:3000/api/token</div></pre></td></tr></table></figure>
+<p>返回值如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">"accessToken"</span>:<span class="string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEzNzIwLCJleHAiOjE1MzMwMTQ2MjB9.5-w9P4AY033GaW77azsd6-mBMOxMMIhaqgMph_tOHpw"</span>&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>refreshToken的失效可以通过数据库的updateTime来判断，如果currentTime - updateTime &gt; 3day，那么就不派发新的accessToken，并且删除旧的refreshToken记录，要求重新登录。</li>
+</ol>
+<h3 id="2-5-改进"><a href="#2-5-改进" class="headerlink" title="2.5 改进"></a>2.5 改进</h3><p>虽然已经大致实现了需求，但是还存在一些不足：</p>
+<ol>
+<li>每次都需要设置authorization，很不方便</li>
+<li>当accessToken过期时，需要手动发送一个token刷新请求，也很不方便</li>
+</ol>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript JWT" >
+    <span class="tag-code">javascript JWT</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    <div class="qrcode">
+      <canvas id="share-qrcode"></canvas>
+      <p class="notice">扫描二维码，分享此文章</p>
+    </div>
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-JWT-JSON-Web-Token"><span class="toc-nav-text">1. JWT (JSON Web Token)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-登录保持"><span class="toc-nav-text">2. 登录保持</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-需求"><span class="toc-nav-text">2.1 需求</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-思路"><span class="toc-nav-text">2.2 思路</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-实现"><span class="toc-nav-text">2.3 实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-4-验证"><span class="toc-nav-text">2.4 验证</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-5-改进"><span class="toc-nav-text">2.5 改进</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2018/07/31/2018-07-31/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "JWT 与 登录保持（一）",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
