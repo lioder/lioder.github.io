@@ -39,7 +39,7 @@
       
         <li class="list-item">
           
-            <a href="/" class="item-link active">Home</a>
+            <a href="/" class="item-link">Home</a>
           
         </li>
       
@@ -78,7 +78,7 @@
         
           <li class="menu-item">
             
-              <a href="/" class="menu-link mobile-active">Home</a>
+              <a href="/" class="menu-link">Home</a>
             
           </li>
         
@@ -111,103 +111,63 @@
   </div>
 </header>
 
-    <main class="app-body">
+    <div id="article-banner">
+  <h2>Archives</h2>
+  <p class="post-date">文章归档</p>
+</div>
+<main class="app-body" id="archives">
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2018/07/31/JWT/">JWT 与 登录保持</a>
-      </h2>
-      <p class="article-date">2018年7月31日</p>
-      
-        
-  <a href="/tags#javascript" >
-    <span class="tag-code">javascript</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          <h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
-<p>具体可参考阮一峰老师对<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">JWT</a>的介绍, 下面主要谈一下登录保持。</p>
-        
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2018
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2018/07/31/JWT/" class="archive-title">JWT 与 登录保持</a>
+        <p class="archive-date">07-31</p>
       </div>
-      <a class="more" href="/2018/07/31/JWT/">Read more</a>
-    </article>
+    
+  </div>
+</section>
   
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/12/27/2017/">2017</a>
-      </h2>
-      <p class="article-date">2017年12月27日</p>
-      
-      <div class="article-summary">
-        
-          2017
-
-January
-穷游杭州
-很幸运订到一家很漂亮的民宿，刷新了我对青年旅舍的理解
-一起吃兰州拉面，玩桌游
-三小时徒步西湖，雷锋塔顶看日落夕阳
-深夜12点还在杭州的路上瞎逛，“和我在杭州的街头走一走，哦~~，直到所有的灯都熄灭了也不停留”
-
-
-Blog 1.0
-
-
-March 
-鸡鸣 ...
-        
+    <section class="time-section">
+  <h1 class="section-year">
+    2017
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2017/12/27/2017/" class="archive-title">2017</a>
+        <p class="archive-date">12-27</p>
       </div>
-      <a class="more" href="/2017/12/27/2017/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/03/25/sakura/">Sakura</a>
-      </h2>
-      <p class="article-date">2017年3月25日</p>
-      
-      <div class="article-summary">
-        
-          
-今天去看了樱花，一个人走在樱花路上，看见家长们带着调皮的孩子，看见一长串身着绿色校服的中学生来春游，互相笑着，调侃着，追赶奔跑着，仿佛曾经的自己
-最近消化道不太舒服，有时候想多睡一会儿，就少了吃饭的时间，满足了第一个大脑，第二个“大脑”也会抗议的吧。对于远离父母的大学生来说，得病应该是最忌 ...
-        
+    
+      <div class="section-list-item">
+        <a href="/2017/03/25/sakura/" class="archive-title">Sakura</a>
+        <p class="archive-date">03-25</p>
       </div>
-      <a class="more" href="/2017/03/25/sakura/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/03/01/关于此博客/">Hello Blog!</a>
-      </h2>
-      <p class="article-date">2017年3月1日</p>
-      
-        
-  <a href="/tags#前端" >
-    <span class="tag-code">前端</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          <h2 id="1-博客的诞生"><a href="#1-博客的诞生" class="headerlink" title="1.博客的诞生"></a>1.博客的诞生</h2><p>几天前在知乎上看见了一篇搭建博客的<a href="https://zhuanlan.zhihu.com/p/25471760" target="_blank" rel="noopener">文章</a>,寒假里也有搭建博客的想法，但是因为服务器和域名的门槛太高就搁置了，但是这篇文章中 hexo + github 的方法还是很简单的。</p>
-<p>最重要的是可以自己设置界面，不像网易博客或者微博，有很大的自主权限。</p>
-<h2 id="2-项目中的技术"><a href="#2-项目中的技术" class="headerlink" title="2.项目中的技术"></a>2.项目中的技术</h2><p>github的使用，git版本控制和shell命令行模式的使用，HTML + CSS + JavaScript，<br>SSH key，hexo框架，markdown。</p>
-<p>2017.3.4  更新</p>
-<p>markdown语法熟悉，老师要求需求等一系列文档用md格式</p>
-<p>推荐编辑软件Typora</p>
-        
+    
+      <div class="section-list-item">
+        <a href="/2017/03/01/关于此博客/" class="archive-title">Hello Blog!</a>
+        <p class="archive-date">03-01</p>
       </div>
-      <a class="more" href="/2017/03/01/关于此博客/">Read more</a>
-    </article>
-  
-
+    
+  </div>
+</section>
   
 </main>
 
-
+<script>
+  (function () {
+    var url = 'http://yoursite.com/tags/javascript/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
+  })();
+</script>
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
