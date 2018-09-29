@@ -1,0 +1,31 @@
+.page .page-container {
+  width: 100%;
+  padding: 60px 0;
+  background-color: #fafafa;
+}
+.page .page-container .page-content {
+  max-width: 650px;
+  margin: 0 auto;
+  font-family: 'Abel', 'Helvetica', sans-serif;
+  word-spacing: 1px;
+}
+@media m-mobile {
+  .page .page-container .page-content {
+    padding: 0 20px;
+  }
+}
+.page .page-container .page-content .page-title {
+  font-size: 28px;
+  font-weight: 350;
+  margin-bottom: 5px;
+}
+.page .page-container .page-content .page-date {
+  font-size: 14px;
+  color: #6e6f6d;
+  margin-bottom: 10px;
+}
+.page .page-container .page-content .page-tag {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #bec0bc;
+}

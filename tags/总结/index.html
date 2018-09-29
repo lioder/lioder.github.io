@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="css/favicon.ico">
+    <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/index.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <a href="/">
+            <div class="logo">
+                <span class=title>Time Lapse</span>
+            </div>
+        </a>
+        <ul class="right-list">
+            
+              <li class="list-item">
+                
+                  <a href="/" class="item-link">Home</a>
+                
+              </li>
+            
+              <li class="list-item">
+                
+                  <a href="/about" class="item-link">About</a>
+                
+              </li>
+            
+          </ul>
+    </div>
+</header>
+<section>
+    <div class="article-container">
+        
+        <a href="2017/12/27/2017/">
+        <article class="article-card">
+            
+            <div class="article-img" style="background-image:url(https://github.com/lioder/gallery/raw/master/photos/%E8%A5%BF%E6%B9%96.png);"></div>
+            
+            <!--<img src="https://github.com/lioder/gallery/raw/master/photos/%E8%A5%BF%E6%B9%96.png" height="300px">-->
+            <div class="slant-box"></div>
+            <div class="article-head">
+                <h3 class="article-title">2017</h3>
+                
+                
+                    <div class="tag">
+    <div class="tag-container" style="background-color: #ff9800"># 总结</div>
+</div>
+                
+                
+                <p class="article-date">2017.12.27</p>
+            </div>
+        </article>
+        </a>
+        
+        <span class="empty-article-card"></span>
+        <span class="empty-article-card"></span>
+        <span class="empty-article-card"></span>
+    </div>
+</section>
+<footer style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 200;">
+    <div class="footer-container" style="width: 100%; text-align: center; color: #6e6f6d; height: 50px; line-height: 50px; font-family: 'Abel', sans-serif">
+        lioder © 2018 Time Lapse
+    </div>
+</footer>
+<script>
+    function async (u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<script>
+    var hasLine = 'false';
+    async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function () {
+        $('figure pre').each(function (i, block) {
+            var figure = $(this).parents('figure');
+            if (hasLine === 'false') {
+                figure.find('.gutter').hide();
+            }
+            var lang = figure.attr('class').split(' ')[1] || 'code';
+            var codeHtml = $(this).html();
+            var codeTag = document.createElement('code');
+            codeTag.className = lang;
+            codeTag.innerHTML = codeHtml;
+            $(this).attr('class', '').empty().html(codeTag);
+            figure.attr('data-lang', lang.toUpperCase());
+            hljs.highlightBlock(block);
+        });
+    })
+</script>
+</body>
+</html>

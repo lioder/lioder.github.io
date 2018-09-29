@@ -1,127 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="Kry·L&#39;s Playground">
-  <meta name="keyword" content="blog">
-  
-    <link rel="shortcut icon" href="/css/images/logo.png">
-  
-  <title>
-    
-      JWT 与 登录保持 | Time Lapse
-    
-  </title>
-  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/plugins/gitment.css">
-  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
-  <script src="/js/qrious.js"></script>
-<script src="/js/gitment.js"></script>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="css/favicon.ico">
+    <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/index.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
-
-  <body>
-    <header class="header fixed-header">
-  <div class="header-container">
-    <a class="home-link" href="/">
-      <div class="logo"></div>
-      <span>Time Lapse</span>
-    </a>
-    <ul class="right-list">
-      
-        <li class="list-item">
-          
-            <a href="/" class="item-link">Home</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/archives/" class="item-link">Archives</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/project/" class="item-link">Projects</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/gallery/" class="item-link">Gallery</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/about/" class="item-link">About</a>
-          
-        </li>
-      
-    </ul>
-    <div class="menu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
+<body>
+<header>
+    <div class="header-container">
+        <a href="/">
+            <div class="logo">
+                <span class=title>Time Lapse</span>
+            </div>
+        </a>
+        <ul class="right-list">
+            
+              <li class="list-item">
+                
+                  <a href="/" class="item-link">Home</a>
+                
+              </li>
+            
+              <li class="list-item">
+                
+                  <a href="/about" class="item-link">About</a>
+                
+              </li>
+            
+          </ul>
     </div>
-    <div class="menu-mask">
-      <ul class="menu-list">
-        
-          <li class="menu-item">
-            
-              <a href="/" class="menu-link">Home</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/archives/" class="menu-link">Archives</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/project/" class="menu-link">Projects</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/gallery/" class="menu-link">Gallery</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/about/" class="menu-link">About</a>
-            
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 </header>
-
-    <div id="article-banner">
-  <h2>JWT 与 登录保持</h2>
-  <p class="post-date">2018-07-31</p>
-  <div class="arrow-down">
-    <a href="javascript:;"></a>
-  </div>
+<div class="page">
+    <div class="page-container">
+        <article class="page-content">
+            <h3 class="page-title">JWT 与 登录保持</h3>
+            <div class="page-date">Published on 2018-07-31</div>
+            <div class="page-tag">
+                
+                
+                <div class="tag">
+    <div class="tag-container" style="background-color: #ff9800"># javascript</div>
 </div>
-<main class="app-body flex-box">
-  <!-- Article START -->
-  <article class="post-article">
-    <section class="markdown-content"><h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
+                
+                
+            </div>
+            <section class="markdown-content"><h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
 <p>具体可参考阮一峰老师对<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">JWT</a>的介绍, 下面主要谈一下登录保持。</p>
 <a id="more"></a> 
 <h2 id="2-登录保持"><a href="#2-登录保持" class="headerlink" title="2. 登录保持"></a>2. 登录保持</h2><h3 id="2-1-需求"><a href="#2-1-需求" class="headerlink" title="2.1 需求"></a>2.1 需求</h3><blockquote>
@@ -189,9 +116,8 @@
 <p>返回值如下：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"accessToken"</span>:<span class="string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEzNzIwLCJleHAiOjE1MzMwMTQ2MjB9.5-w9P4AY033GaW77azsd6-mBMOxMMIhaqgMph_tOHpw"</span>&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li>refreshToken的失效可以通过数据库的updateTime来判断，如果currentTime - updateTime &gt; 3day，那么就不派发新的accessToken，并且删除旧的refreshToken记录，要求重新登录。</li>
+<li><p>refreshToken的失效可以通过数据库的updateTime来判断，如果currentTime - updateTime &gt; 3day，那么就不派发新的accessToken，并且删除旧的refreshToken记录，要求重新登录。</p>
+</li>
 </ol>
 <h3 id="2-5-改进"><a href="#2-5-改进" class="headerlink" title="2.5 改进"></a>2.5 改进</h3><p>每次都要在请求头中加入token，不方便。accessToken失效，需要手动换取新的accessToken，也不方便。</p>
 <p>因此最好有一种代理机制，能在每次发请求和收到请求时做一些处理。下面使用axios的请求拦截器来实现。</p>
@@ -203,177 +129,47 @@
 <p>Vue 文件</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        username: <span class="string">''</span>,</span><br><span class="line">        password: <span class="string">''</span>,</span><br><span class="line">        authenticated: <span class="literal">true</span>,</span><br><span class="line">        secret: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">    login() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; username, password &#125; = <span class="keyword">this</span>;</span><br><span class="line">        axios.post(<span class="string">'/api/login'</span>, &#123;</span><br><span class="line">            name: username</span><br><span class="line">        &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            localStorage.setItem(<span class="string">'username'</span>, <span class="keyword">this</span>.username);</span><br><span class="line">            localStorage.setItem(<span class="string">'accessToken'</span>, res.data.accessToken);</span><br><span class="line">            localStorage.setItem(<span class="string">'refreshToken'</span>, res.data.refreshToken);</span><br><span class="line">            <span class="keyword">this</span>.authenticated = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">this</span>.getSecret();</span><br><span class="line">        &#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    getSecret() &#123;</span><br><span class="line">        axios.get(<span class="string">'/api/secret'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.secret = res.data</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </section>
-    <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#javascript" >
-    <span class="tag-code">javascript</span>
-  </a>
-
-      </div>
-    
-    <!-- Tags END -->
-    <!-- 打赏 START -->
-    
-    <!-- 打赏 END -->
-    <!-- 二维码 START -->
-    <div class="qrcode">
-      <canvas id="share-qrcode"></canvas>
-      <p class="notice">扫描二维码，分享此文章</p>
+        </article>
     </div>
-    <!-- 二维码 END -->
-    
-      <!-- No Comment -->
-    
-  </article>
-  <!-- Article END -->
-  <!-- Catalog START -->
-  
-    <aside class="catalog-container">
-  <div class="toc-main">
-    <strong class="toc-title">Catalog</strong>
-    
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-JWT-JSON-Web-Token"><span class="toc-nav-text">1. JWT (JSON Web Token)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-登录保持"><span class="toc-nav-text">2. 登录保持</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-1-需求"><span class="toc-nav-text">2.1 需求</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-2-思路"><span class="toc-nav-text">2.2 思路</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-3-实现"><span class="toc-nav-text">2.3 实现</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-4-验证"><span class="toc-nav-text">2.4 验证</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-5-改进"><span class="toc-nav-text">2.5 改进</span></a></li></ol></li></ol>
-    
-  </div>
-</aside>
-  
-  <!-- Catalog END -->
-</main>
-
-<script>
-  (function () {
-    var url = 'http://yoursite.com/2018/07/31/JWT/';
-    var banner = 'undefined'
-    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
-      $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
-      })
-    } else {
-      $('#article-banner').geopattern(url)
-    }
-    $('.header').removeClass('fixed-header')
-
-     // error image
-    $(".markdown-content img").on('error', function() {
-      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
-      $(this).css({
-        'cursor': 'default'
-      })
-    })
-
-    // zoom image
-    $(".markdown-content img").on('click', function() {
-      var src = $(this).attr('src')
-      if (src !== 'http://file.muyutech.com/error-img.png') {
-        var imageW = $(this).width()
-        var imageH = $(this).height()
-        
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-        zoom = zoom < 1 ? 1 : zoom
-        zoom = zoom > 2 ? 2 : zoom
-        var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
-        $('.image-view-wrap').addClass('wrap-active')
-        $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-        })
-        $('html').css('overflow', 'hidden')
-
-        $('.image-view-wrap').on('click', function() {
-          $(this).remove()
-          $('html').attr('style', '')
-        })
-      }
-    })
-
-    // qrcode
-    var qr = new QRious({
-      element: document.getElementById('share-qrcode'),
-      value: document.location.href
-    });
-
-    // gitment
-    var gitmentConfig = "undefined";
-    if (gitmentConfig !== 'undefined') {
-      var gitment = new Gitment({
-        id: "JWT 与 登录保持",
-        owner: "undefined",
-        repo: "undefined",
-        oauth: {
-          client_id: "undefined",
-          client_secret: "undefined"
-        },
-        theme: {
-          render(state, instance) {
-            const container = document.createElement('div')
-            container.lang = "en-US"
-            container.className = 'gitment-container gitment-root-container'
-            container.appendChild(instance.renderHeader(state, instance))
-            container.appendChild(instance.renderEditor(state, instance))
-            container.appendChild(instance.renderComments(state, instance))
-            container.appendChild(instance.renderFooter(state, instance))
-            return container;
-          }
-        }
-      })
-      gitment.render(document.getElementById('comments'))
-    }
-  })();
-</script>
-
-    <div class="scroll-top">
-  <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
-  <p class="copyright">
-    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-    <br>
-    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
-  </p>
+</div>
+<footer style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 200;">
+    <div class="footer-container" style="width: 100%; text-align: center; color: #6e6f6d; height: 50px; line-height: 50px; font-family: 'Abel', sans-serif">
+        lioder © 2018 Time Lapse
+    </div>
 </footer>
-
 <script>
-  function async(u, c) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
+    function async (u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
 </script>
 <script>
-  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-    FastClick.attach(document.body);
-  })
+    var hasLine = 'false';
+    async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function () {
+        $('figure pre').each(function (i, block) {
+            var figure = $(this).parents('figure');
+            if (hasLine === 'false') {
+                figure.find('.gutter').hide();
+            }
+            var lang = figure.attr('class').split(' ')[1] || 'code';
+            var codeHtml = $(this).html();
+            var codeTag = document.createElement('code');
+            codeTag.className = lang;
+            codeTag.innerHTML = codeHtml;
+            $(this).attr('class', '').empty().html(codeTag);
+            figure.attr('data-lang', lang.toUpperCase());
+            hljs.highlightBlock(block);
+        });
+    })
 </script>
-
-<script>
-  var hasLine = 'true';
-  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
-    $('figure pre').each(function(i, block) {
-      var figure = $(this).parents('figure');
-      if (hasLine === 'false') {
-        figure.find('.gutter').hide();
-      }
-      var lang = figure.attr('class').split(' ')[1] || 'code';
-      var codeHtml = $(this).html();
-      var codeTag = document.createElement('code');
-      codeTag.className = lang;
-      codeTag.innerHTML = codeHtml;
-      $(this).attr('class', '').empty().html(codeTag);
-      figure.attr('data-lang', lang.toUpperCase());
-      hljs.highlightBlock(block);
-    });
-  })
-</script>
-<!-- Baidu Tongji -->
-
-<script src="/js/script.js"></script>
-  </body>
+</body>
 </html>

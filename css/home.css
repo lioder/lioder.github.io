@@ -1,0 +1,10 @@
+.article-container {
+    display: flex;
+}
+
+.article-card {
+    flex: 0 0 auto;
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 0 3px 3px #f5f7f9;
+}

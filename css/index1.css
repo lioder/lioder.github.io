@@ -1,0 +1,45 @@
+@import "header.styl";
+@import "home.css";
+@import "tag.css";
+@import url(http://fonts.font.im/css?family=Abel);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: #F7F7F7;
+    height: 100%;
+}
+
+body {
+    position: relative;
+    min-height: 100%;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none
+}
+
+a:link {
+    text-decoration: none;
+    color: #000;
+}
+
+a:active {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #000;
+}

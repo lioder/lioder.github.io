@@ -1,0 +1,11 @@
+.tag-container {
+    display: inline-block;
+    position: relative;
+    height: 23px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    border-radius: 11.5px;
+    font-size: 13px;
+    line-height: 23px;
+    color: white;
+}
