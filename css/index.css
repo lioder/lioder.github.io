@@ -150,6 +150,7 @@
 .markdown-content ol li,
 .article-summary ol li {
   padding: 5px 0;
+  list-style: disc !important;
 }
 .markdown-content img,
 .article-summary img {
