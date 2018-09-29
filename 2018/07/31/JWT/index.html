@@ -51,7 +51,6 @@
             </div>
             <section class="markdown-content"><h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
 <p>具体可参考阮一峰老师对<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">JWT</a>的介绍, 下面主要谈一下登录保持。</p>
-<a id="more"></a> 
 <h2 id="2-登录保持"><a href="#2-登录保持" class="headerlink" title="2. 登录保持"></a>2. 登录保持</h2><h3 id="2-1-需求"><a href="#2-1-需求" class="headerlink" title="2.1 需求"></a>2.1 需求</h3><blockquote>
 <p>用户通过帐号和密码登录，登录后在很长一段时间（e.g. 3天）内可以保持登录状态。即使用户关闭浏览器后，在若干小时后打开页面依然可以直接进入服务，而不需要重新登录。当用户隔较长时间（e.g. &gt;3天）未登录时，再次登录需要重新输入帐号和密码。</p>
 </blockquote>
@@ -61,10 +60,7 @@
 <blockquote>
 <p>存在的问题：</p>
 <ol>
-<li>由于要实现3天内免登录，token的有效时间就要设为3天。</li>
-</ol>
-<p>较长的有效时间带来了较低的安全性。</p>
-<ol>
+<li>由于要实现3天内免登录，token的有效时间就要设为3天。较长的有效时间带来了较低的安全性。</li>
 <li>剩余时间难以预测。假如设定的剩余时间是1h，用户很小概率恰好在失效前的最后一小时还在使用服务。</li>
 </ol>
 </blockquote>

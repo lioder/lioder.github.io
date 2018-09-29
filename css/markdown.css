@@ -36,6 +36,7 @@
 }
 .markdown-content p,
 .article-summary p {
+  display: inline-block;
   line-height: 1.8em;
   font-size: 14px;
   font-weight: 350;
@@ -115,11 +116,18 @@
   margin: 15px 0;
 }
 .markdown-content ul li,
-.article-summary ul li,
+.article-summary ul li {
+  padding: 5px 0;
+  list-style-type: disc;
+  list-style-position: inside;
+  line-height: 1.8em;
+}
 .markdown-content ol li,
 .article-summary ol li {
   padding: 5px 0;
-  list-style: disc !important;
+  list-style-type: decimal;
+  list-style-position: inside;
+  line-height: 1.8em;
 }
 .markdown-content img,
 .article-summary img {
