@@ -1,10 +1,70 @@
 .article-container {
+    position: relative;
     display: flex;
+    padding: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #F7F7F7;
+    z-index: 10;
 }
 
 .article-card {
+    position: relative;
+    margin-right: 30px;
+    margin-bottom: 30px;
     flex: 0 0 auto;
-    width: 200px;
+    width: 267px;
+    min-height: 370px;
     background-color: white;
-    box-shadow: 0 0 3px 3px #f5f7f9;
+    box-shadow: 0 0 3px 1px #e4e7e9;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.empty-article-card {
+    flex: 0 0 auto;
+    display: inline-block;
+    height: 0;
+    width: 267px;
+    visibility: hidden;
+    margin-right: 30px;
+    padding: 0;
+}
+.article-img {
+    min-height: 250px;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+.article-head {
+    min-height: 120px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+    padding: 10px 20px;
+}
+
+.article-title {
+    font-size: 17px;
+    font-weight: 350;
+    margin-bottom: 10px;
+}
+
+.article-date {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    color: #6e6f6d;
+    font-size: 14px;
+    font-family: 'Abel', sans-serif;
+}
+
+.slant-box {
+    position: absolute;
+    left: 0;
+    bottom: 80px;
+    width: 290px;
+    height: 70px;
+    background-color: white;
+    transform: rotate(7deg) translate(-10px, 0);
+    z-index: 0;
 }
