@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Time Lapse</title>
+    <link rel="shortcut icon" href="css/favicon.ico">
+    <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/index.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <a href="/">
+            <div class="logo">
+                <span class=title>Time Lapse</span>
+            </div>
+        </a>
+        <ul class="right-list">
+            
+              <li class="list-item">
+                
+                  <a href="/" class="item-link">Home</a>
+                
+              </li>
+            
+              <li class="list-item">
+                
+                  <a href="/about" class="item-link">About</a>
+                
+              </li>
+            
+          </ul>
+    </div>
+</header>
+<div class="page">
+    <div class="page-container">
+        <article class="page-content">
+            <h3 class="page-title">JavaScript测试</h3>
+            <div class="page-date">Published on 2018-10-19</div>
+            <div class="page-tag">
+                
+                
+                <div class="tag">
+    <div class="tag-container" style="background-color: #ff9800"># JavaScript</div>
+</div>
+                
+                
+            </div>
+            <section class="markdown-content"><h1 id="JavaScript-测试"><a href="#JavaScript-测试" class="headerlink" title="JavaScript 测试"></a>JavaScript 测试</h1><h2 id="使用-Jest-进行单元测试"><a href="#使用-Jest-进行单元测试" class="headerlink" title="使用 Jest 进行单元测试"></a>使用 Jest 进行单元测试</h2><blockquote>
+<p>Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在<code>__tests__</code>文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jest"</span>: &#123;</span><br><span class="line">    <span class="string">"testRegex"</span>: <span class="string">"(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="先来用一下"><a href="#先来用一下" class="headerlink" title="先来用一下"></a>先来用一下</h3><p>首先我们创建一个需要测试的模块 <code>divide.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">divide</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = divide;</span><br></pre></td></tr></table></figure>
+<p>接着我们创建测试文件 <code>divide.test.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> divide = <span class="built_in">require</span>(<span class="string">'./divide'</span>)</span><br><span class="line"></span><br><span class="line">test(<span class="string">'dividing 6 by 3 equals 2'</span>, () =&gt; &#123;</span><br><span class="line">    expect(divide(<span class="number">6</span>, <span class="number">3</span>)).toBe(<span class="number">2</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>记得安装 Jest 模块<code>npm install Jest</code>并在<code>package.json</code>中加入Jest的运行脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;jest&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，用<code>npm run test</code>来运行测试，可以看到以下结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PASS  ./divide.test.js</span><br><span class="line"> ✓ dividing 6 by 3 equals 2 (5ms)</span><br></pre></td></tr></table></figure>
+<h3 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h3><p>test函数接受三个参数，分别是：</p>
+<ul>
+<li>测试名称</li>
+<li>包含期待值的函数</li>
+<li>测试最长等待时间</li>
+</ul>
+<p>expect函数接受一个想要测试的值，并与 matcher 函数的参数比较。在本例中，想要测试的值是 divide 函数的返回值，matcher 函数是 toBe。详细的 matcher 函数可参考 <a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">Jest 的文档</a>。</p>
+<h3 id="聚合测试"><a href="#聚合测试" class="headerlink" title="聚合测试"></a>聚合测试</h3><p>在一个文件中可能存在多个测试。我们可以使用 <strong>describe</strong>函数来聚合它们，让代码看起来更简洁，也可以更好的定位错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// group-tests.test.js</span></span><br><span class="line">describe(<span class="string">'test the random function'</span>, ()=&gt; &#123;</span><br><span class="line">    it(<span class="string">'the type of return value should be number'</span>, () =&gt; &#123;</span><br><span class="line">        expect(<span class="keyword">typeof</span> <span class="built_in">Math</span>.random()).toEqual(<span class="string">'number'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    it(<span class="string">'the return value is between 0 and 1'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> n = <span class="built_in">Math</span>.random();</span><br><span class="line">        expect(n).toBeGreaterThanOrEqual(<span class="number">0</span>)</span><br><span class="line">        expect(n).toBeLessThan(<span class="number">1</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>it 是 test 的别名</p>
+</blockquote>
+<p>假如我们将 <code>expect(n).toBeGreaterThanOrEqual(0)</code> 改成 <code>expect(n).toBeGreaterThanOrEqual(0)</code>，有概率会得到以下错误提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FAIL  ./grouping-tests.test.js</span><br><span class="line"> ● test the random function › the return value is between 0 and 1</span><br><span class="line"></span><br><span class="line">   expect(received).toBeGreaterThanOrEqual(expected)</span><br><span class="line"></span><br><span class="line">   Expected: 0.5</span><br><span class="line">   Received: 0.42696381528118543</span><br></pre></td></tr></table></figure>
+<h2 id="使用-Enzyme-测试-React-组件"><a href="#使用-Enzyme-测试-React-组件" class="headerlink" title="使用 Enzyme 测试 React 组件"></a>使用 Enzyme 测试 React 组件</h2><p>首先安装 Enzyme 和 React</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install enzyme</span><br><span class="line">npm install react</span><br></pre></td></tr></table></figure>
+<p>接着安装 enzyme 的适配器。我们要使用 React 16.x 版本，所以安装 enzyme-adapter-react-16</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install enzyme-adapter-react-16</span><br></pre></td></tr></table></figure>
+<p>然后创建配置文件 <code>setupTests.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;configure&#125; <span class="keyword">from</span> <span class="string">'enzyme'</span></span><br><span class="line"><span class="keyword">import</span> Adapter <span class="keyword">from</span> <span class="string">'enzyme-adapter-react-16'</span></span><br><span class="line"></span><br><span class="line">configure(&#123;<span class="attr">adapter</span>: <span class="keyword">new</span> Adapter()&#125;);</span><br></pre></td></tr></table></figure>
+<p>最后在<code>package.json</code>中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;jest&quot;: &#123;</span><br><span class="line">	&quot;setupTestFrameworkScriptFile&quot;: &quot;&lt;rootDir&gt;/enzyme/setupTests.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="浅渲染"><a href="#浅渲染" class="headerlink" title="浅渲染"></a>浅渲染</h3><p>Enzyme 的 shallow 函数只渲染父组件，因此称为浅渲染。浅渲染保证被测试的组件不会受到其他组件的干扰。</p>
+<p>首先创建一个组件 App.js</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;div&gt;Hello, world!&lt;/div&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<p>然后创建测试文件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; shallow &#125; <span class="keyword">from</span> <span class="string">'enzyme'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'app component'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="string">'constains a header with the "Hello, world!"'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> app = shallow(&lt;App /&gt;);</span><br><span class="line">        expect(app.containsMatchingElement(&lt;div&gt;Hello, world!&lt;/div&gt;)).toEqual(true);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>然后我们运行测试，就可以看到以下结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PASS  jest/grouping-tests.test.js</span><br><span class="line">PASS  jest/divide.test.js</span><br><span class="line">PASS  enzyme/App.test.js</span><br></pre></td></tr></table></figure>
+<p>在这里，Jest 扮演了测试驱动器的作用。接下来看看 Enzyme 在更复杂的组件场景下的使用。</p>
+<p>首先创建组件 <code>TodoList.js</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TodoList = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.tasks.map(<span class="function">(<span class="params">task, idx</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (&lt;li key=&#123;idx&#125;&gt;&#123;task&#125;&lt;/li&gt;);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">export default TodoList;</span></span><br></pre></td></tr></table></figure>
+<p>然后创建测试文件<code>TodoList.test.js</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123;shallow&#125; <span class="keyword">from</span> <span class="string">'enzyme'</span></span><br><span class="line"><span class="keyword">import</span> TodoList <span class="keyword">from</span> <span class="string">'./TodoList'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'when provide tasks props'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="string">'contains same number of &lt;li&gt; Elements'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> tasks = [<span class="string">'eat food'</span>, <span class="string">'wash hands'</span>, <span class="string">'sleep'</span>];</span><br><span class="line">        <span class="keyword">const</span> todoList = shallow(&lt;TodoList tasks=&#123;tasks&#125;/&gt;);</span><br><span class="line">        expect(todoList.find('li').length).toEqual(tasks.length)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>运行测试后，可以看到测试全部通过。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://wanago.io/2018/09/03/javascript-testing-tutorial-part-two-introducing-enzyme-and-testing-react-components/" target="_blank" rel="noopener">JavaScript Test Tutorial</a></li>
+<li><a href="https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md" target="_blank" rel="noopener">Shallow Rendering API</a></li>
+<li><a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">Jest 的文档</a></li>
+</ul>
+</section>
+        </article>
+    </div>
+</div>
+</div>
+<footer style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 200;">
+    <div class="footer-container" style="width: 100%; text-align: center; color: #6e6f6d; height: 50px; line-height: 50px; font-family: 'Abel', sans-serif">
+        lioder © 2018 Time Lapse
+    </div>
+</footer>
+<script>
+    function async (u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<script>
+    var hasLine = 'false';
+    async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function () {
+        $('figure pre').each(function (i, block) {
+            var figure = $(this).parents('figure');
+            if (hasLine === 'false') {
+                figure.find('.gutter').hide();
+            }
+            var lang = figure.attr('class').split(' ')[1] || 'code';
+            var codeHtml = $(this).html();
+            var codeTag = document.createElement('code');
+            codeTag.className = lang;
+            codeTag.innerHTML = codeHtml;
+            $(this).attr('class', '').empty().html(codeTag);
+            figure.attr('data-lang', lang.toUpperCase());
+            hljs.highlightBlock(block);
+        });
+    })
+</script>
+</body>
+</html>
