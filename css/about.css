@@ -1,5 +1,5 @@
 .about .about-container {
-  padding: 60px 0;
+  padding: 60px 30px;
   max-width: 650px;
   margin: 0 auto;
   font-family: 'Abel', 'Helvetica', sans-serif;
@@ -31,4 +31,9 @@
 }
 .about .about-container p {
   line-height: 32px;
+}
+@media screen and (max-width: 400px) {
+  .about .about-container .visited-places {
+    display: none;
+  }
 }
