@@ -4,58 +4,66 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>Time Lapse</title>
-    <link rel="shortcut icon" href="css/favicon.ico">
+    <link rel="shortcut icon" href="http://lioder.xyz/css/favicon.ico">
     <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet"
-    href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
+          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <header>
     <div class="header-container">
-        <a href="/">
-            <div class="logo">
-                <span class=title>Time Lapse</span>
-            </div>
-        </a>
+        <div class="logo">
+            <span class=title>Time Lapse</span>
+        </div>
         <ul class="right-list">
             
-              <li class="list-item">
-                
-                  <a href="/" class="item-link">Home</a>
-                
-              </li>
+                <li class="list-item">
+                    
+                        <a href="/" class="item-link">Home</a>
+                    
+                </li>
             
-              <li class="list-item">
-                
-                  <a href="/about" class="item-link">About</a>
-                
-              </li>
+                <li class="list-item">
+                    
+                        <a href="/about" class="item-link">About</a>
+                    
+                </li>
             
-          </ul>
+        </ul>
+        <div class="icon-wrapper">
+            <i data-feather="menu" class="menu-icon"></i>
+        </div>
+        <div class="mobile-menu" style="visibility: hidden">
+            <ul>
+                <li class="mobile-menu-item">Home</li>
+                <li class="mobile-menu-item">About</li>
+            </ul>
+        </div>
     </div>
 </header>
+
 <section>
     <div class="article-container">
         
-        <a href="2018/10/19/JavaScript测试/">
+        <a href="2018/07/31/JWT/">
         <article class="article-card">
             
-            <div class="article-img" style="background-image:url(images/JavaScript-test.png);"></div>
+            <div class="article-img" style="background-image:url(./images/IMG_8152.JPG);"></div>
             
-            <!--<img src="images/JavaScript-test.png" height="300px">-->
+            <!--<img src="./images/IMG_8152.JPG" height="300px">-->
             <div class="slant-box"></div>
             <div class="article-head">
-                <h3 class="article-title">JavaScript测试</h3>
+                <h3 class="article-title">JWT 与 登录保持</h3>
                 
                 
                     <div class="tag">
-    <div class="tag-container" style="background-color: #6fa3ef"># JavaScript</div>
+    <div class="tag-container" style="background-color: #ff9800"># javascript</div>
 </div>
                 
                 
-                <p class="article-date">2018.10.19</p>
+                <p class="article-date">2018.07.31</p>
             </div>
         </article>
         </a>
@@ -103,5 +111,34 @@
         });
     })
 </script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+    let menuIcon = 'menu';
+    feather.replace();
+
+    document.querySelector('.logo').addEventListener('click', () => {
+        location.href = '/';
+        // document.querySelector('.menu-icon').style.display = 'none';
+    })
+    document.querySelector('.icon-wrapper').addEventListener('click', function () {
+        let iconEle = document.querySelector('.menu-icon');
+        if (menuIcon === 'x') {
+            iconEle.dataset.feather = 'menu';
+            menuIcon = 'menu';
+            document.querySelector('.mobile-menu').style.visibility = 'hidden';
+        } else {
+            iconEle.dataset.feather = 'x';
+            menuIcon = 'x';
+            document.querySelector('.mobile-menu').style.visibility = 'visible';
+        }
+        console.log(menuIcon)
+        feather.replace();
+    })
+
+
+</script>
+</body>
+</html>
+t>
 </body>
 </html>

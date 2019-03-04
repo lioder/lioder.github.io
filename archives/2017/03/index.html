@@ -4,38 +4,46 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>Time Lapse</title>
-    <link rel="shortcut icon" href="css/favicon.ico">
+    <link rel="shortcut icon" href="http://lioder.xyz/css/favicon.ico">
     <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet"
-    href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
+          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <header>
     <div class="header-container">
-        <a href="/">
-            <div class="logo">
-                <span class=title>Time Lapse</span>
-            </div>
-        </a>
+        <div class="logo">
+            <span class=title>Time Lapse</span>
+        </div>
         <ul class="right-list">
             
-              <li class="list-item">
-                
-                  <a href="/" class="item-link">Home</a>
-                
-              </li>
+                <li class="list-item">
+                    
+                        <a href="/" class="item-link">Home</a>
+                    
+                </li>
             
-              <li class="list-item">
-                
-                  <a href="/about" class="item-link">About</a>
-                
-              </li>
+                <li class="list-item">
+                    
+                        <a href="/about" class="item-link">About</a>
+                    
+                </li>
             
-          </ul>
+        </ul>
+        <div class="icon-wrapper">
+            <i data-feather="menu" class="menu-icon"></i>
+        </div>
+        <div class="mobile-menu" style="visibility: hidden">
+            <ul>
+                <li class="mobile-menu-item">Home</li>
+                <li class="mobile-menu-item">About</li>
+            </ul>
+        </div>
     </div>
 </header>
+
 <section>
     <div class="article-container">
         
@@ -51,7 +59,7 @@
                 
                 
                     <div class="tag">
-    <div class="tag-container" style="background-color: #46c47c"># 随想</div>
+    <div class="tag-container" style="background-color: #6fa3ef"># 随想</div>
 </div>
                 
                 
@@ -72,7 +80,7 @@
                 
                 
                     <div class="tag">
-    <div class="tag-container" style="background-color: #ff9800"># 前端</div>
+    <div class="tag-container" style="background-color: #46c47c"># 前端</div>
 </div>
                 
                 
@@ -123,6 +131,32 @@
             hljs.highlightBlock(block);
         });
     })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+    let menuIcon = 'menu';
+    feather.replace();
+
+    document.querySelector('.logo').addEventListener('click', () => {
+        location.href = '/';
+        // document.querySelector('.menu-icon').style.display = 'none';
+    })
+    document.querySelector('.icon-wrapper').addEventListener('click', function () {
+        let iconEle = document.querySelector('.menu-icon');
+        if (menuIcon === 'x') {
+            iconEle.dataset.feather = 'menu';
+            menuIcon = 'menu';
+            document.querySelector('.mobile-menu').style.visibility = 'hidden';
+        } else {
+            iconEle.dataset.feather = 'x';
+            menuIcon = 'x';
+            document.querySelector('.mobile-menu').style.visibility = 'visible';
+        }
+        console.log(menuIcon)
+        feather.replace();
+    })
+
+
 </script>
 </body>
 </html>
