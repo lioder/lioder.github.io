@@ -53,7 +53,7 @@
                 
                 
                 <div class="tag">
-    <div class="tag-container" style="background-color: #EA4335"># Vue</div>
+    <div class="tag-container" style="background-color: #46c47c"># Vue</div>
 </div>
                 
                 
@@ -107,7 +107,7 @@
 <p>这样遍历完后，要么newStartIdx &gt; newEndIdx，表示新的先遍历完，那就删除oldVnodes中oldStartIdx至oldEndIdx部分；要么oldStartIdx &gt; oldEndIDx，表示老的先遍历完，那就把新的还没遍历过的那段concat到oldVnodes后。</p>
 <h4 id="如果不是sameNode"><a href="#如果不是sameNode" class="headerlink" title="如果不是sameNode"></a>如果不是sameNode</h4><p>说明不值得比较，新的vnode直接代替老的vnode。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> oEl = oldVnode.el <span class="comment">// 获得老的el</span></span><br><span class="line"><span class="keyword">let</span> parentEle = api.parentNode(oEl) <span class="comment">// 获得老的vnode对应DOM节点的父元素</span></span><br><span class="line">createEle(vnode) <span class="comment">// 创建新vnode的DOM节点</span></span><br><span class="line"><span class="keyword">if</span> (parentEle !== <span class="literal">null</span>) &#123;</span><br><span class="line">    api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl)) <span class="comment">// 插入DOM</span></span><br><span class="line">    api.removeChild(parentEle, oldVnode.el) <span class="comment">// 移除老的DOM元素</span></span><br><span class="line">    oldVnode = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="流程图总结"><a href="#流程图总结" class="headerlink" title="流程图总结"></a>流程图总结</h4><p><img src="/Users/lioder/Downloads/%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png" alt="未命名文件"></p>
+<h4 id="流程图总结"><a href="#流程图总结" class="headerlink" title="流程图总结"></a>流程图总结</h4><p><img src="https://github.com/lioder/lioder.github.io/raw/master/images/vue-diff.png" alt="vue-diff"></p>
 <h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p><a href="https://github.com/aooy/blog/blob/master/images/issues-2/diff.png?raw=true" target="_blank" rel="noopener">解析vue2.0的diff算法</a></p>
 </section>
         </article>
