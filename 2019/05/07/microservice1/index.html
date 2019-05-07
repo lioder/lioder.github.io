@@ -47,20 +47,46 @@
 <div class="page">
     <div class="page-container">
         <article class="page-content">
-            <h3 class="page-title">Sakura</h3>
-            <div class="page-date">Published on 2017-03-25</div>
+            <h3 class="page-title">微服务从0开始(0)</h3>
+            <div class="page-date">Published on 2019-05-07</div>
             <div class="page-tag">
                 
                 
                 <div class="tag">
-    <div class="tag-container" style="background-color: #6fa3ef"># 随想</div>
+    <div class="tag-container" style="background-color: #ff9800"># Microservice</div>
 </div>
                 
                 
             </div>
-            <section class="markdown-content"><p><img src="https://github.com/lioder/gallery/raw/master/photos/%E6%A8%B1%E8%8A%B12.png" width="300"></p>
-<p>今天去看了樱花，一个人走在樱花路上，看见家长们带着调皮的孩子，看见一长串身着绿色校服的中学生来春游，互相笑着，调侃着，追赶奔跑着，仿佛曾经的自己</p>
-<p>最近消化道不太舒服，有时候想多睡一会儿，就少了吃饭的时间，满足了第一个大脑，第二个“大脑”也会抗议的吧。对于远离父母的大学生来说，得病应该是最忌讳的事情了，没有父母的照料，饮食上无法选择，就像是刚出生的婴儿一样，毫无招架之力</p>
+            <section class="markdown-content"><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>因为第二学期软件设计与体系结构课上一直在强调微服务，最后也设计了一个微服务的体系结构，但自己对微服务其实还是一知半解（别笑）。秉持的实践出真知的原则，我还是打算写一个微服务来全面理解一下。</p>
+<p>下面列举了我在没有实践微服务之前主要的疑惑：</p>
+<ol>
+<li>RPC是什么，为什么服务之间不使用Rest和HTTP通信？</li>
+<li>服务注册和服务发现是什么？</li>
+<li>为什么要用NGINX？</li>
+<li>Docker在微服务中有什么用？</li>
+<li>CI和CD在微服务中怎样实践？</li>
+</ol>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><blockquote>
+<p>我学习微服务主要是用Go语言</p>
+</blockquote>
+<p>首先解答问题1：RPC是什么，为什么服务之间不使用Rest和HTTP通信？</p>
+<p><strong>如果使用Rest和HTTP，那么服务间传递数据是这样的：</strong></p>
+<p>服务A将数据encode成json字符串，通过ajax发送给服务B，服务B parse成对象</p>
+<p><strong>如果使用gRPC，那么服务间传递数据是这样的：</strong></p>
+<p>使用protobuf协议约定数据格式，服务A将数据转化为二进制数据流，基于HTTP 2.0 的二进制数据帧发送给服务B，服务B按照约定的格式parse成对象</p>
+<p>微服务可以使用Rest和HTTP通信，但是多了encode和decode的步骤</p>
+<h3 id="最基本的微服务结构"><a href="#最基本的微服务结构" class="headerlink" title="最基本的微服务结构"></a>最基本的微服务结构</h3><ul>
+<li>先使用protobuf语法定义一个微服务以及他的方法，定义一系列消息对象</li>
+<li>然后通过protobuf编译器编译成go语言文件，文件中包含了定义的消息结构体，一系列微服务方法以及接口</li>
+<li>写一个service，实现上述接口</li>
+<li>创建一个gRPC服务器，将我们的service与协议中的微服务绑定</li>
+<li>写一个client，首先拨号连接到gRPC服务器，然后调用协议中的方法创建客户端，客户端可以调用协议中定义的微服务的各种方法</li>
+</ul>
+<p>![<a href="https://github.com/lioder/lioder.github.io/raw/master/images/microservice1.png" target="_blank" rel="noopener">https://github.com/lioder/lioder.github.io/raw/master/images/microservice1.png</a>)</p>
+<p>从客户端出发来看，客户端先获取gRPC服务器的连接，然后通过.pb.go获得服务的调用器，之后就像调用本地方法一样使用</p>
+<p>而service这边，创建了一个gRPC服务器，并将自己进行注册</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这里只做一个梳理和记录，具体的实践代码可以参考：<a href="https://wuyin.io/2018/05/10/microservices-part-1-introduction-and-consignment-service/#more" target="_blank" rel="noopener">Golang 微服务教程（一）</a></p>
 </section>
         </article>
     </div>
