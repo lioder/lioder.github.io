@@ -83,7 +83,7 @@
 <li>创建一个gRPC服务器，将我们的service与协议中的微服务绑定</li>
 <li>写一个client，首先拨号连接到gRPC服务器，然后调用协议中的方法创建客户端，客户端可以调用协议中定义的微服务的各种方法</li>
 </ul>
-<p>![<a href="https://github.com/lioder/lioder.github.io/raw/master/images/microservice1.png" target="_blank" rel="noopener">https://github.com/lioder/lioder.github.io/raw/master/images/microservice1.png</a>)</p>
+<p><img src="https://github.com/lioder/lioder.github.io/raw/master/images/microservice1.png" alt=""></p>
 <p>从客户端出发来看，客户端先获取gRPC服务器的连接，然后通过.pb.go获得服务的调用器，之后就像调用本地方法一样使用</p>
 <p>而service这边，创建了一个gRPC服务器，并将自己进行注册</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>这里只做一个梳理和记录，具体的实践代码可以参考：<a href="https://wuyin.io/2018/05/10/microservices-part-1-introduction-and-consignment-service/#more" target="_blank" rel="noopener">Golang 微服务教程（一）</a></p>
