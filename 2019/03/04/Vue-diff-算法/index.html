@@ -1,77 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html  lang="zh">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>Time Lapse</title>
-    <link rel="shortcut icon" href="http://lioder.xyz/css/favicon.ico">
-    <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet"
-          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+<title>Vue-diff-算法 - Time Lapse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="Vue diff 算法在Vue中用virtual DOM来对应真实的DOM，每一个DOM节点用一个vnode表示。那么当数据更新时，如何知道哪些vnode需要更新呢？答案就是使用diff算法。">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-diff-算法">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/Vue-diff-算法/index.html">
+<meta property="og:site_name" content="Time Lapse">
+<meta property="og:description" content="Vue diff 算法在Vue中用virtual DOM来对应真实的DOM，每一个DOM节点用一个vnode表示。那么当数据更新时，如何知道哪些vnode需要更新呢？答案就是使用diff算法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-05-29T01:01:41.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue-diff-算法">
+<meta name="twitter:description" content="Vue diff 算法在Vue中用virtual DOM来对应真实的DOM，每一个DOM节点用一个vnode表示。那么当数据更新时，如何知道哪些vnode需要更新呢？答案就是使用diff算法。">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-<header>
-    <div class="header-container">
-        <div class="logo">
-            <span class=title>Time Lapse</span>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="Vue-diff-算法" height="28">
+            
+            </a>
         </div>
-        <ul class="right-list">
+        <div class="navbar-menu">
             
-                <li class="list-item">
-                    
-                        <a href="/" class="item-link">Home</a>
-                    
-                </li>
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
             
-                <li class="list-item">
-                    
-                        <a href="/about" class="item-link">About</a>
-                    
-                </li>
-            
-        </ul>
-        <div class="icon-wrapper">
-            <i data-feather="menu" class="menu-icon"></i>
-        </div>
-        <div class="mobile-menu" style="visibility: hidden">
-            <ul>
-                <li class="mobile-menu-item"><a href="/">Home</a></li>
-                <li class="mobile-menu-item"><a href="/about">About</a></li>
-            </ul>
+            <div class="navbar-end">
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
         </div>
     </div>
-</header>
-
-<div class="page">
-    <div class="page-container">
-        <article class="page-content">
-            <h3 class="page-title">Vue-diff-算法</h3>
-            <div class="page-date">Published on 2019-03-04</div>
-            <div class="page-tag">
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time>
                 
                 
-                <div class="tag">
-    <div class="tag-container" style="background-color: #ff9800"># Vue</div>
-</div>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2237 个字)
+                </span>
                 
                 
             </div>
-            <section class="markdown-content"><h2 id="Vue-diff-算法"><a href="#Vue-diff-算法" class="headerlink" title="Vue diff 算法"></a>Vue diff 算法</h2><p>在Vue中用virtual DOM来对应真实的DOM，每一个DOM节点用一个vnode表示。那么当数据更新时，如何知道哪些vnode需要更新呢？答案就是使用diff算法。</p>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Vue-diff-算法
+            
+        </h1>
+        <div class="content">
+            <h2 id="Vue-diff-算法"><a href="#Vue-diff-算法" class="headerlink" title="Vue diff 算法"></a>Vue diff 算法</h2><p>在Vue中用virtual DOM来对应真实的DOM，每一个DOM节点用一个vnode表示。那么当数据更新时，如何知道哪些vnode需要更新呢？答案就是使用diff算法。</p>
+<a id="more"></a>
 <p>diff算法只按层级比较。</p>
 <p><img src="https://github.com/aooy/blog/blob/master/images/issues-2/diff.png?raw=true" alt=""></p>
 <h4 id="从什么时候开始patch？"><a href="#从什么时候开始patch？" class="headerlink" title="从什么时候开始patch？"></a>从什么时候开始patch？</h4><p>当数据通过set修改时，会调用闭包中的Dep，Dep通知所有注册的watcher进行更新。</p>
 <p>更新方法如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Vue.prototype._update = <span class="function"><span class="keyword">function</span> (<span class="params">vnode: VNode, hydrating?: boolean</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> vm: Component = <span class="keyword">this</span></span><br><span class="line">    <span class="comment">/*如果已经该组件已经挂载过了则代表进入这个步骤是个更新的过程，触发beforeUpdate钩子*/</span></span><br><span class="line">    <span class="keyword">if</span> (vm._isMounted) &#123;</span><br><span class="line">      callHook(vm, <span class="string">'beforeUpdate'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> prevEl = vm.$el</span><br><span class="line">    <span class="keyword">const</span> prevVnode = vm._vnode</span><br><span class="line">    <span class="keyword">const</span> prevActiveInstance = activeInstance</span><br><span class="line">    activeInstance = vm</span><br><span class="line">    vm._vnode = vnode</span><br><span class="line">    <span class="comment">// Vue.prototype.__patch__ is injected in entry points</span></span><br><span class="line">    <span class="comment">// based on the rendering backend used.</span></span><br><span class="line">    <span class="comment">/*基于后端渲染Vue.prototype.__patch__被用来作为一个入口*/</span></span><br><span class="line">    <span class="keyword">if</span> (!prevVnode) &#123;</span><br><span class="line">      <span class="comment">// initial render</span></span><br><span class="line">      vm.$el = vm.__patch__(</span><br><span class="line">        vm.$el, vnode, hydrating, <span class="literal">false</span> <span class="comment">/* removeOnly */</span>,</span><br><span class="line">        vm.$options._parentElm,</span><br><span class="line">        vm.$options._refElm</span><br><span class="line">      )</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// updates</span></span><br><span class="line">      vm.$el = vm.__patch__(prevVnode, vnode)</span><br><span class="line">    &#125;</span><br><span class="line">    activeInstance = prevActiveInstance</span><br><span class="line">    <span class="comment">// update __vue__ reference</span></span><br><span class="line">    <span class="comment">/*更新新的实例对象的__vue__*/</span></span><br><span class="line">    <span class="keyword">if</span> (prevEl) &#123;</span><br><span class="line">      prevEl.__vue__ = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (vm.$el) &#123;</span><br><span class="line">      vm.$el.__vue__ = vm</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// if parent is an HOC, update its $el as well</span></span><br><span class="line">    <span class="keyword">if</span> (vm.$vnode &amp;&amp; vm.$parent &amp;&amp; vm.$vnode === vm.$parent._vnode) &#123;</span><br><span class="line">      vm.$parent.$el = vm.$el</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// updated hook is called by the scheduler to ensure that children are</span></span><br><span class="line">    <span class="comment">// updated in a parent's updated hook.</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Vue.prototype._update = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">vnode: VNode, hydrating?: boolean</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> vm: Component = <span class="hljs-keyword">this</span></span><br><span class="line">    <span class="hljs-comment">/*如果已经该组件已经挂载过了则代表进入这个步骤是个更新的过程，触发beforeUpdate钩子*/</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (vm._isMounted) &#123;</span><br><span class="line">      callHook(vm, <span class="hljs-string">'beforeUpdate'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">const</span> prevEl = vm.$el</span><br><span class="line">    <span class="hljs-keyword">const</span> prevVnode = vm._vnode</span><br><span class="line">    <span class="hljs-keyword">const</span> prevActiveInstance = activeInstance</span><br><span class="line">    activeInstance = vm</span><br><span class="line">    vm._vnode = vnode</span><br><span class="line">    <span class="hljs-comment">// Vue.prototype.__patch__ is injected in entry points</span></span><br><span class="line">    <span class="hljs-comment">// based on the rendering backend used.</span></span><br><span class="line">    <span class="hljs-comment">/*基于后端渲染Vue.prototype.__patch__被用来作为一个入口*/</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (!prevVnode) &#123;</span><br><span class="line">      <span class="hljs-comment">// initial render</span></span><br><span class="line">      vm.$el = vm.__patch__(</span><br><span class="line">        vm.$el, vnode, hydrating, <span class="hljs-literal">false</span> <span class="hljs-comment">/* removeOnly */</span>,</span><br><span class="line">        vm.$options._parentElm,</span><br><span class="line">        vm.$options._refElm</span><br><span class="line">      )</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-comment">// updates</span></span><br><span class="line">      vm.$el = vm.__patch__(prevVnode, vnode)</span><br><span class="line">    &#125;</span><br><span class="line">    activeInstance = prevActiveInstance</span><br><span class="line">    <span class="hljs-comment">// update __vue__ reference</span></span><br><span class="line">    <span class="hljs-comment">/*更新新的实例对象的__vue__*/</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (prevEl) &#123;</span><br><span class="line">      prevEl.__vue__ = <span class="hljs-literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vm.$el) &#123;</span><br><span class="line">      vm.$el.__vue__ = vm</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// if parent is an HOC, update its $el as well</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (vm.$vnode &amp;&amp; vm.$parent &amp;&amp; vm.$vnode === vm.$parent._vnode) &#123;</span><br><span class="line">      vm.$parent.$el = vm.$el</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// updated hook is called by the scheduler to ensure that children are</span></span><br><span class="line">    <span class="hljs-comment">// updated in a parent's updated hook.</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>方法第一个参数传入新的vnode，将旧的vnode赋值给preVnode，然后将新的vnode赋值给当前组件的vnode，然后执行<code>vm.__patch__(prevVnode, vnode)</code>。</p>
-<h4 id="怎么-patch？"><a href="#怎么-patch？" class="headerlink" title="怎么 patch？"></a>怎么 patch？</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*createPatchFunction的返回值，一个patch函数*/</span></span><br><span class="line"> <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">patch</span> (<span class="params">oldVnode, vnode, hydrating, removeOnly, parentElm, refElm</span>) </span>&#123;</span><br><span class="line">   <span class="comment">/*旧vode存在，新vnode不存在，就调用销毁的钩子函数*/</span></span><br><span class="line">   <span class="keyword">if</span> (isUndef(vnode)) &#123;</span><br><span class="line">     <span class="keyword">if</span> (isDef(oldVnode)) invokeDestroyHook(oldVnode)</span><br><span class="line">     <span class="keyword">return</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">let</span> isInitialPatch = <span class="literal">false</span></span><br><span class="line">   <span class="keyword">const</span> insertedVnodeQueue = []</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (isUndef(oldVnode)) &#123;</span><br><span class="line">     <span class="comment">// empty mount (likely as component), create new root element</span></span><br><span class="line">     <span class="comment">/*oldVnode未定义的时候，其实也就是root节点，创建一个新的节点*/</span></span><br><span class="line">     isInitialPatch = <span class="literal">true</span></span><br><span class="line">     createElm(vnode, insertedVnodeQueue, parentElm, refElm)</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="comment">/*标记旧的VNode是否有nodeType*/</span></span><br><span class="line">     <span class="comment">/*Github:https://github.com/answershuto*/</span></span><br><span class="line">     <span class="keyword">const</span> isRealElement = isDef(oldVnode.nodeType)</span><br><span class="line">     <span class="keyword">if</span> (!isRealElement &amp;&amp; sameVnode(oldVnode, vnode)) &#123;</span><br><span class="line">       <span class="comment">// patch existing root node</span></span><br><span class="line">       <span class="comment">/*是同一个节点的时候直接修改现有的节点*/</span></span><br><span class="line">       patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">if</span> (isRealElement) &#123;</span><br><span class="line">         <span class="comment">// mounting to a real element</span></span><br><span class="line">         <span class="comment">// check if this is server-rendered content and if we can perform</span></span><br><span class="line">         <span class="comment">// a successful hydration.</span></span><br><span class="line">         <span class="keyword">if</span> (oldVnode.nodeType === <span class="number">1</span> &amp;&amp; oldVnode.hasAttribute(SSR_ATTR)) &#123;</span><br><span class="line">           <span class="comment">/*当旧的VNode是服务端渲染的元素，hydrating记为true*/</span></span><br><span class="line">           oldVnode.removeAttribute(SSR_ATTR)</span><br><span class="line">           hydrating = <span class="literal">true</span></span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span> (isTrue(hydrating)) &#123;</span><br><span class="line">           <span class="comment">/*需要合并到真实DOM上*/</span></span><br><span class="line">           <span class="keyword">if</span> (hydrate(oldVnode, vnode, insertedVnodeQueue)) &#123;</span><br><span class="line">             <span class="comment">/*调用insert钩子*/</span></span><br><span class="line">             invokeInsertHook(vnode, insertedVnodeQueue, <span class="literal">true</span>)</span><br><span class="line">             <span class="keyword">return</span> oldVnode</span><br><span class="line">           &#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">             warn(</span><br><span class="line">               <span class="string">'The client-side rendered virtual DOM tree is not matching '</span> +</span><br><span class="line">               <span class="string">'server-rendered content. This is likely caused by incorrect '</span> +</span><br><span class="line">               <span class="string">'HTML markup, for example nesting block-level elements inside '</span> +</span><br><span class="line">               <span class="string">'&lt;p&gt;, or missing &lt;tbody&gt;. Bailing hydration and performing '</span> +</span><br><span class="line">               <span class="string">'full client-side render.'</span></span><br><span class="line">             )</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">// either not server-rendered, or hydration failed.</span></span><br><span class="line">         <span class="comment">// create an empty node and replace it</span></span><br><span class="line">         <span class="comment">/*如果不是服务端渲染或者合并到真实DOM失败，则创建一个空的VNode节点替换它*/</span></span><br><span class="line">         oldVnode = emptyNodeAt(oldVnode)</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// replacing existing element</span></span><br><span class="line">       <span class="comment">/*取代现有元素*/</span></span><br><span class="line">       <span class="keyword">const</span> oldElm = oldVnode.elm</span><br><span class="line">       <span class="keyword">const</span> parentElm = nodeOps.parentNode(oldElm)</span><br><span class="line">       createElm(</span><br><span class="line">         vnode,</span><br><span class="line">         insertedVnodeQueue,</span><br><span class="line">         <span class="comment">// extremely rare edge case: do not insert if old element is in a</span></span><br><span class="line">         <span class="comment">// leaving transition. Only happens when combining transition +</span></span><br><span class="line">         <span class="comment">// keep-alive + HOCs. (#4590)</span></span><br><span class="line">         oldElm._leaveCb ? <span class="literal">null</span> : parentElm,</span><br><span class="line">         nodeOps.nextSibling(oldElm)</span><br><span class="line">       )</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (isDef(vnode.parent)) &#123;</span><br><span class="line">         <span class="comment">// component root element replaced.</span></span><br><span class="line">         <span class="comment">// update parent placeholder node element, recursively</span></span><br><span class="line">         <span class="comment">/*组件根节点被替换，遍历更新父节点element*/</span></span><br><span class="line">         <span class="keyword">let</span> ancestor = vnode.parent</span><br><span class="line">         <span class="keyword">while</span> (ancestor) &#123;</span><br><span class="line">           ancestor.elm = vnode.elm</span><br><span class="line">           ancestor = ancestor.parent</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span> (isPatchable(vnode)) &#123;</span><br><span class="line">           <span class="comment">/*调用create回调*/</span></span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; cbs.create.length; ++i) &#123;</span><br><span class="line">             cbs.create[i](emptyNode, vnode.parent)</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (isDef(parentElm)) &#123;</span><br><span class="line">         <span class="comment">/*移除老节点*/</span></span><br><span class="line">         removeVnodes(parentElm, [oldVnode], <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(oldVnode.tag)) &#123;</span><br><span class="line">         <span class="comment">/*Github:https://github.com/answershuto*/</span></span><br><span class="line">         <span class="comment">/*调用destroy钩子*/</span></span><br><span class="line">         invokeDestroyHook(oldVnode)</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;js</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*调用insert钩子*/</span></span><br><span class="line">   invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch)</span><br><span class="line">   <span class="keyword">return</span> vnode.elm</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="怎么-patch？"><a href="#怎么-patch？" class="headerlink" title="怎么 patch？"></a>怎么 patch？</h4><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*createPatchFunction的返回值，一个patch函数*/</span></span><br><span class="line"> <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">patch</span> (<span class="hljs-params">oldVnode, vnode, hydrating, removeOnly, parentElm, refElm</span>) </span>&#123;</span><br><span class="line">   <span class="hljs-comment">/*旧vode存在，新vnode不存在，就调用销毁的钩子函数*/</span></span><br><span class="line">   <span class="hljs-keyword">if</span> (isUndef(vnode)) &#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (isDef(oldVnode)) invokeDestroyHook(oldVnode)</span><br><span class="line">     <span class="hljs-keyword">return</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="hljs-keyword">let</span> isInitialPatch = <span class="hljs-literal">false</span></span><br><span class="line">   <span class="hljs-keyword">const</span> insertedVnodeQueue = []</span><br><span class="line"></span><br><span class="line">   <span class="hljs-keyword">if</span> (isUndef(oldVnode)) &#123;</span><br><span class="line">     <span class="hljs-comment">// empty mount (likely as component), create new root element</span></span><br><span class="line">     <span class="hljs-comment">/*oldVnode未定义的时候，其实也就是root节点，创建一个新的节点*/</span></span><br><span class="line">     isInitialPatch = <span class="hljs-literal">true</span></span><br><span class="line">     createElm(vnode, insertedVnodeQueue, parentElm, refElm)</span><br><span class="line">   &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">     <span class="hljs-comment">/*标记旧的VNode是否有nodeType*/</span></span><br><span class="line">     <span class="hljs-comment">/*Github:https://github.com/answershuto*/</span></span><br><span class="line">     <span class="hljs-keyword">const</span> isRealElement = isDef(oldVnode.nodeType)</span><br><span class="line">     <span class="hljs-keyword">if</span> (!isRealElement &amp;&amp; sameVnode(oldVnode, vnode)) &#123;</span><br><span class="line">       <span class="hljs-comment">// patch existing root node</span></span><br><span class="line">       <span class="hljs-comment">/*是同一个节点的时候直接修改现有的节点*/</span></span><br><span class="line">       patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">       <span class="hljs-keyword">if</span> (isRealElement) &#123;</span><br><span class="line">         <span class="hljs-comment">// mounting to a real element</span></span><br><span class="line">         <span class="hljs-comment">// check if this is server-rendered content and if we can perform</span></span><br><span class="line">         <span class="hljs-comment">// a successful hydration.</span></span><br><span class="line">         <span class="hljs-keyword">if</span> (oldVnode.nodeType === <span class="hljs-number">1</span> &amp;&amp; oldVnode.hasAttribute(SSR_ATTR)) &#123;</span><br><span class="line">           <span class="hljs-comment">/*当旧的VNode是服务端渲染的元素，hydrating记为true*/</span></span><br><span class="line">           oldVnode.removeAttribute(SSR_ATTR)</span><br><span class="line">           hydrating = <span class="hljs-literal">true</span></span><br><span class="line">         &#125;</span><br><span class="line">         <span class="hljs-keyword">if</span> (isTrue(hydrating)) &#123;</span><br><span class="line">           <span class="hljs-comment">/*需要合并到真实DOM上*/</span></span><br><span class="line">           <span class="hljs-keyword">if</span> (hydrate(oldVnode, vnode, insertedVnodeQueue)) &#123;</span><br><span class="line">             <span class="hljs-comment">/*调用insert钩子*/</span></span><br><span class="line">             invokeInsertHook(vnode, insertedVnodeQueue, <span class="hljs-literal">true</span>)</span><br><span class="line">             <span class="hljs-keyword">return</span> oldVnode</span><br><span class="line">           &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV !== <span class="hljs-string">'production'</span>) &#123;</span><br><span class="line">             warn(</span><br><span class="line">               <span class="hljs-string">'The client-side rendered virtual DOM tree is not matching '</span> +</span><br><span class="line">               <span class="hljs-string">'server-rendered content. This is likely caused by incorrect '</span> +</span><br><span class="line">               <span class="hljs-string">'HTML markup, for example nesting block-level elements inside '</span> +</span><br><span class="line">               <span class="hljs-string">'&lt;p&gt;, or missing &lt;tbody&gt;. Bailing hydration and performing '</span> +</span><br><span class="line">               <span class="hljs-string">'full client-side render.'</span></span><br><span class="line">             )</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="hljs-comment">// either not server-rendered, or hydration failed.</span></span><br><span class="line">         <span class="hljs-comment">// create an empty node and replace it</span></span><br><span class="line">         <span class="hljs-comment">/*如果不是服务端渲染或者合并到真实DOM失败，则创建一个空的VNode节点替换它*/</span></span><br><span class="line">         oldVnode = emptyNodeAt(oldVnode)</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="hljs-comment">// replacing existing element</span></span><br><span class="line">       <span class="hljs-comment">/*取代现有元素*/</span></span><br><span class="line">       <span class="hljs-keyword">const</span> oldElm = oldVnode.elm</span><br><span class="line">       <span class="hljs-keyword">const</span> parentElm = nodeOps.parentNode(oldElm)</span><br><span class="line">       createElm(</span><br><span class="line">         vnode,</span><br><span class="line">         insertedVnodeQueue,</span><br><span class="line">         <span class="hljs-comment">// extremely rare edge case: do not insert if old element is in a</span></span><br><span class="line">         <span class="hljs-comment">// leaving transition. Only happens when combining transition +</span></span><br><span class="line">         <span class="hljs-comment">// keep-alive + HOCs. (#4590)</span></span><br><span class="line">         oldElm._leaveCb ? <span class="hljs-literal">null</span> : parentElm,</span><br><span class="line">         nodeOps.nextSibling(oldElm)</span><br><span class="line">       )</span><br><span class="line"></span><br><span class="line">       <span class="hljs-keyword">if</span> (isDef(vnode.parent)) &#123;</span><br><span class="line">         <span class="hljs-comment">// component root element replaced.</span></span><br><span class="line">         <span class="hljs-comment">// update parent placeholder node element, recursively</span></span><br><span class="line">         <span class="hljs-comment">/*组件根节点被替换，遍历更新父节点element*/</span></span><br><span class="line">         <span class="hljs-keyword">let</span> ancestor = vnode.parent</span><br><span class="line">         <span class="hljs-keyword">while</span> (ancestor) &#123;</span><br><span class="line">           ancestor.elm = vnode.elm</span><br><span class="line">           ancestor = ancestor.parent</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="hljs-keyword">if</span> (isPatchable(vnode)) &#123;</span><br><span class="line">           <span class="hljs-comment">/*调用create回调*/</span></span><br><span class="line">           <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; cbs.create.length; ++i) &#123;</span><br><span class="line">             cbs.create[i](emptyNode, vnode.parent)</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-keyword">if</span> (isDef(parentElm)) &#123;</span><br><span class="line">         <span class="hljs-comment">/*移除老节点*/</span></span><br><span class="line">         removeVnodes(parentElm, [oldVnode], <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)</span><br><span class="line">       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isDef(oldVnode.tag)) &#123;</span><br><span class="line">         <span class="hljs-comment">/*Github:https://github.com/answershuto*/</span></span><br><span class="line">         <span class="hljs-comment">/*调用destroy钩子*/</span></span><br><span class="line">         invokeDestroyHook(oldVnode)</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;js</span><br><span class="line"></span><br><span class="line">   <span class="hljs-comment">/*调用insert钩子*/</span></span><br><span class="line">   invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch)</span><br><span class="line">   <span class="hljs-keyword">return</span> vnode.elm</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>分为两种情况：</p>
 <p>sameNode和非sameNode</p>
 <h4 id="如何判断sameNode"><a href="#如何判断sameNode" class="headerlink" title="如何判断sameNode?"></a>如何判断sameNode?</h4><p>两节点key相同，tag相同，同为注释节点或同不为注释节点，是否定义data，是否有相同的类型（当tag为input时）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sameVnode</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    a.key === b.key &amp;&amp;</span><br><span class="line">    a.tag === b.tag &amp;&amp;</span><br><span class="line">    a.isComment === b.isComment &amp;&amp;</span><br><span class="line">    isDef(a.data) === isDef(b.data) &amp;&amp;</span><br><span class="line">    sameInputType(a, b)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sameInputType</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a.tag !== <span class="string">'input'</span>) <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  <span class="keyword">let</span> i</span><br><span class="line">  <span class="keyword">const</span> typeA = isDef(i = a.data) &amp;&amp; isDef(i = i.attrs) &amp;&amp; i.type</span><br><span class="line">  <span class="keyword">const</span> typeB = isDef(i = b.data) &amp;&amp; isDef(i = i.attrs) &amp;&amp; i.type</span><br><span class="line">  <span class="keyword">return</span> typeA === typeB</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sameVnode</span> (<span class="hljs-params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> (</span><br><span class="line">    a.key === b.key &amp;&amp;</span><br><span class="line">    a.tag === b.tag &amp;&amp;</span><br><span class="line">    a.isComment === b.isComment &amp;&amp;</span><br><span class="line">    isDef(a.data) === isDef(b.data) &amp;&amp;</span><br><span class="line">    sameInputType(a, b)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sameInputType</span> (<span class="hljs-params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (a.tag !== <span class="hljs-string">'input'</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span></span><br><span class="line">  <span class="hljs-keyword">let</span> i</span><br><span class="line">  <span class="hljs-keyword">const</span> typeA = isDef(i = a.data) &amp;&amp; isDef(i = i.attrs) &amp;&amp; i.type</span><br><span class="line">  <span class="hljs-keyword">const</span> typeB = isDef(i = b.data) &amp;&amp; isDef(i = i.attrs) &amp;&amp; i.type</span><br><span class="line">  <span class="hljs-keyword">return</span> typeA === typeB</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="patchVnode"><a href="#patchVnode" class="headerlink" title="patchVnode"></a>patchVnode</h4><p>如果是sameVnode，就执行<code>patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> elm = vnode.elm = oldVnode.elm</span><br><span class="line">   <span class="keyword">const</span> oldCh = oldVnode.children</span><br><span class="line">   <span class="keyword">const</span> ch = vnode.children</span><br><span class="line"> </span><br><span class="line">   <span class="comment">/*如果这个VNode节点没有text文本时*/</span></span><br><span class="line">   <span class="keyword">if</span> (isUndef(vnode.text)) &#123;</span><br><span class="line">     <span class="keyword">if</span> (isDef(oldCh) &amp;&amp; isDef(ch)) &#123;</span><br><span class="line">       <span class="comment">/*新老节点均有children子节点，则对子节点进行diff操作，调用updateChildren*/</span></span><br><span class="line">       <span class="keyword">if</span> (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)</span><br><span class="line">     &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(ch)) &#123;</span><br><span class="line">       <span class="comment">/*如果老节点没有子节点而新节点存在子节点，先清空elm的文本内容，然后为当前节点加入子节点*/</span></span><br><span class="line">       <span class="keyword">if</span> (isDef(oldVnode.text)) nodeOps.setTextContent(elm, <span class="string">''</span>)</span><br><span class="line">       addVnodes(elm, <span class="literal">null</span>, ch, <span class="number">0</span>, ch.length - <span class="number">1</span>, insertedVnodeQueue)</span><br><span class="line">     &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(oldCh)) &#123;</span><br><span class="line">       <span class="comment">/*当新节点没有子节点而老节点有子节点的时候，则移除所有ele的子节点*/</span></span><br><span class="line">       removeVnodes(elm, oldCh, <span class="number">0</span>, oldCh.length - <span class="number">1</span>)</span><br><span class="line">     &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDef(oldVnode.text)) &#123;</span><br><span class="line">       <span class="comment">/*当新老节点都无子节点的时候，只是文本的替换，因为这个逻辑中新节点text不存在，所以直接去除ele的文本*/</span></span><br><span class="line">       nodeOps.setTextContent(elm, <span class="string">''</span>)</span><br><span class="line">     &#125;</span><br><span class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (oldVnode.text !== vnode.text) &#123;</span><br><span class="line">     <span class="comment">/*当新老节点text不一样时，直接替换这段文本*/</span></span><br><span class="line">     nodeOps.setTextContent(elm, vnode.text)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/*调用postpatch钩子*/</span></span><br><span class="line">   <span class="keyword">if</span> (isDef(data)) &#123;</span><br><span class="line">     <span class="keyword">if</span> (isDef(i = data.hook) &amp;&amp; isDef(i = i.postpatch)) i(oldVnode, vnode)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> elm = vnode.elm = oldVnode.elm</span><br><span class="line">   <span class="hljs-keyword">const</span> oldCh = oldVnode.children</span><br><span class="line">   <span class="hljs-keyword">const</span> ch = vnode.children</span><br><span class="line"> </span><br><span class="line">   <span class="hljs-comment">/*如果这个VNode节点没有text文本时*/</span></span><br><span class="line">   <span class="hljs-keyword">if</span> (isUndef(vnode.text)) &#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (isDef(oldCh) &amp;&amp; isDef(ch)) &#123;</span><br><span class="line">       <span class="hljs-comment">/*新老节点均有children子节点，则对子节点进行diff操作，调用updateChildren*/</span></span><br><span class="line">       <span class="hljs-keyword">if</span> (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isDef(ch)) &#123;</span><br><span class="line">       <span class="hljs-comment">/*如果老节点没有子节点而新节点存在子节点，先清空elm的文本内容，然后为当前节点加入子节点*/</span></span><br><span class="line">       <span class="hljs-keyword">if</span> (isDef(oldVnode.text)) nodeOps.setTextContent(elm, <span class="hljs-string">''</span>)</span><br><span class="line">       addVnodes(elm, <span class="hljs-literal">null</span>, ch, <span class="hljs-number">0</span>, ch.length - <span class="hljs-number">1</span>, insertedVnodeQueue)</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isDef(oldCh)) &#123;</span><br><span class="line">       <span class="hljs-comment">/*当新节点没有子节点而老节点有子节点的时候，则移除所有ele的子节点*/</span></span><br><span class="line">       removeVnodes(elm, oldCh, <span class="hljs-number">0</span>, oldCh.length - <span class="hljs-number">1</span>)</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (isDef(oldVnode.text)) &#123;</span><br><span class="line">       <span class="hljs-comment">/*当新老节点都无子节点的时候，只是文本的替换，因为这个逻辑中新节点text不存在，所以直接去除ele的文本*/</span></span><br><span class="line">       nodeOps.setTextContent(elm, <span class="hljs-string">''</span>)</span><br><span class="line">     &#125;</span><br><span class="line">   &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (oldVnode.text !== vnode.text) &#123;</span><br><span class="line">     <span class="hljs-comment">/*当新老节点text不一样时，直接替换这段文本*/</span></span><br><span class="line">     nodeOps.setTextContent(elm, vnode.text)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="hljs-comment">/*调用postpatch钩子*/</span></span><br><span class="line">   <span class="hljs-keyword">if</span> (isDef(data)) &#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (isDef(i = data.hook) &amp;&amp; isDef(i = i.postpatch)) i(oldVnode, vnode)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>首先newVnode如果是文本节点，就直接将老的文本节点内容，换成新的文本节点内容。</p>
 <p>如果不是，则要比较他们的children。</p>
 <p>那么有四种情况：</p>
@@ -106,77 +206,843 @@
 <p>先取出newStartIdx对应的vnode，获得它的key，然后去map里看有没有这个key，如果有的话，patchVnode并移动DOM节点。移动的方式是将这个oldVnode节点移到oldStartIdx对应的节点前。然后newStartIdx++。如果没有对应的key的话，会创建一个新的节点，插入到oldStartIdx对应的节点前。然后newStartIdx++。</p>
 <p>这样遍历完后，要么newStartIdx &gt; newEndIdx，表示新的先遍历完，那就删除oldVnodes中oldStartIdx至oldEndIdx部分；要么oldStartIdx &gt; oldEndIDx，表示老的先遍历完，那就把新的还没遍历过的那段concat到oldVnodes后。</p>
 <h4 id="如果不是sameNode"><a href="#如果不是sameNode" class="headerlink" title="如果不是sameNode"></a>如果不是sameNode</h4><p>说明不值得比较，新的vnode直接代替老的vnode。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> oEl = oldVnode.el <span class="comment">// 获得老的el</span></span><br><span class="line"><span class="keyword">let</span> parentEle = api.parentNode(oEl) <span class="comment">// 获得老的vnode对应DOM节点的父元素</span></span><br><span class="line">createEle(vnode) <span class="comment">// 创建新vnode的DOM节点</span></span><br><span class="line"><span class="keyword">if</span> (parentEle !== <span class="literal">null</span>) &#123;</span><br><span class="line">    api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl)) <span class="comment">// 插入DOM</span></span><br><span class="line">    api.removeChild(parentEle, oldVnode.el) <span class="comment">// 移除老的DOM元素</span></span><br><span class="line">    oldVnode = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> oEl = oldVnode.el <span class="hljs-comment">// 获得老的el</span></span><br><span class="line"><span class="hljs-keyword">let</span> parentEle = api.parentNode(oEl) <span class="hljs-comment">// 获得老的vnode对应DOM节点的父元素</span></span><br><span class="line">createEle(vnode) <span class="hljs-comment">// 创建新vnode的DOM节点</span></span><br><span class="line"><span class="hljs-keyword">if</span> (parentEle !== <span class="hljs-literal">null</span>) &#123;</span><br><span class="line">    api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl)) <span class="hljs-comment">// 插入DOM</span></span><br><span class="line">    api.removeChild(parentEle, oldVnode.el) <span class="hljs-comment">// 移除老的DOM元素</span></span><br><span class="line">    oldVnode = <span class="hljs-literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="流程图总结"><a href="#流程图总结" class="headerlink" title="流程图总结"></a>流程图总结</h4><p><img src="https://github.com/lioder/lioder.github.io/raw/master/images/vue-diff.png" alt="vue-diff"></p>
 <h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p><a href="https://github.com/aooy/blog/blob/master/images/issues-2/diff.png?raw=true" target="_blank" rel="noopener">解析vue2.0的diff算法</a></p>
-</section>
-        </article>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Vue/">Vue</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/07/microservice1/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">微服务从0开始</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/19/JavaScript测试/">
+                <span class="level-item">JavaScript测试</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
 </div>
-<footer style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 200;">
-    <div class="footer-container" style="width: 100%; text-align: center; color: #6e6f6d; height: 50px; line-height: 50px; font-family: 'Abel', sans-serif">
-        lioder © 2018 Time Lapse
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://avatars2.githubusercontent.com/u/20789674?s=460&amp;v=4" alt="lioder">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        lioder
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        TimeLapse
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>南京</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/lioder" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/lioder">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://weibo.com/lioder/home">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/05/07/microservice1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-07T12:07:45.000Z">2019-05-07</time></div>
+                    <a href="/2019/05/07/microservice1/" class="has-link-black-ter is-size-6">微服务从0开始</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/04/Vue-diff-算法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-diff-算法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time></div>
+                    <a href="/2019/03/04/Vue-diff-算法/" class="has-link-black-ter is-size-6">Vue-diff-算法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/19/JavaScript测试/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JavaScript测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time></div>
+                    <a href="/2018/10/19/JavaScript测试/" class="has-link-black-ter is-size-6">JavaScript测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/31/JWT/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
+                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/27/2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
+                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Microservice/">
+                        <span class="tag">Microservice</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随想/">
+                        <span class="tag">随想</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/05/07/microservice1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-07T12:07:45.000Z">2019-05-07</time></div>
+                    <a href="/2019/05/07/microservice1/" class="has-link-black-ter is-size-6">微服务从0开始</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/04/Vue-diff-算法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-diff-算法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time></div>
+                    <a href="/2019/03/04/Vue-diff-算法/" class="has-link-black-ter is-size-6">Vue-diff-算法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/19/JavaScript测试/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JavaScript测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time></div>
+                    <a href="/2018/10/19/JavaScript测试/" class="has-link-black-ter is-size-6">JavaScript测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/31/JWT/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
+                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/27/2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
+                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Microservice/">
+                        <span class="tag">Microservice</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随想/">
+                        <span class="tag">随想</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="Vue-diff-算法" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Kry·L&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
     </div>
 </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    function async (u, c) {
-        var d = document, t = 'script',
-            o = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        o.src = u;
-        if (c) {
-            o.addEventListener('load', function (e) {
-                c(null, e);
-            }, false);
-        }
-        s.parentNode.insertBefore(o, s);
-    }
-</script>
-<script>
-    var hasLine = 'false';
-    async("//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js", function () {
-        $('figure pre').each(function (i, block) {
-            var figure = $(this).parents('figure');
-            if (hasLine === 'false') {
-                figure.find('.gutter').hide();
-            }
-            var lang = figure.attr('class').split(' ')[1] || 'code';
-            var codeHtml = $(this).html();
-            var codeTag = document.createElement('code');
-            codeTag.className = lang;
-            codeTag.innerHTML = codeHtml;
-            $(this).attr('class', '').empty().html(codeTag);
-            figure.attr('data-lang', lang.toUpperCase());
-            hljs.highlightBlock(block);
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
         });
-    })
+    });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    let menuIcon = 'menu';
-    feather.replace();
-
-    document.querySelector('.logo').addEventListener('click', () => {
-        location.href = '/';
-        // document.querySelector('.menu-icon').style.display = 'none';
-    })
-    document.querySelector('.icon-wrapper').addEventListener('click', function () {
-        let iconEle = document.querySelector('.menu-icon');
-        if (menuIcon === 'x') {
-            iconEle.dataset.feather = 'menu';
-            menuIcon = 'menu';
-            document.querySelector('.mobile-menu').style.visibility = 'hidden';
-        } else {
-            iconEle.dataset.feather = 'x';
-            menuIcon = 'x';
-            document.querySelector('.mobile-menu').style.visibility = 'visible';
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
         }
-        console.log(menuIcon)
-        feather.replace();
-    })
-
-
+    });
+});
 </script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>

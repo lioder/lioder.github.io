@@ -1,65 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html  lang="zh">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>Time Lapse</title>
-    <link rel="shortcut icon" href="http://lioder.xyz/css/favicon.ico">
-    <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet"
-          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+<title>JWT 与 登录保持 - Time Lapse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="1. JWT (JSON Web Token)JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。 具体可参考阮一峰老师对JWT的介绍, 下面主要谈一下登录">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT 与 登录保持">
+<meta property="og:url" content="http://yoursite.com/2018/07/31/JWT/index.html">
+<meta property="og:site_name" content="Time Lapse">
+<meta property="og:description" content="1. JWT (JSON Web Token)JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。 具体可参考阮一峰老师对JWT的介绍, 下面主要谈一下登录">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-05-29T01:02:30.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JWT 与 登录保持">
+<meta name="twitter:description" content="1. JWT (JSON Web Token)JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。 具体可参考阮一峰老师对JWT的介绍, 下面主要谈一下登录">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-<header>
-    <div class="header-container">
-        <div class="logo">
-            <span class=title>Time Lapse</span>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="JWT 与 登录保持" height="28">
+            
+            </a>
         </div>
-        <ul class="right-list">
+        <div class="navbar-menu">
             
-                <li class="list-item">
-                    
-                        <a href="/" class="item-link">Home</a>
-                    
-                </li>
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
             
-                <li class="list-item">
-                    
-                        <a href="/about" class="item-link">About</a>
-                    
-                </li>
-            
-        </ul>
-        <div class="icon-wrapper">
-            <i data-feather="menu" class="menu-icon"></i>
-        </div>
-        <div class="mobile-menu" style="visibility: hidden">
-            <ul>
-                <li class="mobile-menu-item"><a href="/">Home</a></li>
-                <li class="mobile-menu-item"><a href="/about">About</a></li>
-            </ul>
+            <div class="navbar-end">
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
         </div>
     </div>
-</header>
-
-<div class="page">
-    <div class="page-container">
-        <article class="page-content">
-            <h3 class="page-title">JWT 与 登录保持</h3>
-            <div class="page-date">Published on 2018-07-31</div>
-            <div class="page-tag">
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time>
                 
                 
-                <div class="tag">
-    <div class="tag-container" style="background-color: #ff9800"># javascript</div>
-</div>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1593 个字)
+                </span>
                 
                 
             </div>
-            <section class="markdown-content"><h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                JWT 与 登录保持
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-JWT-JSON-Web-Token"><a href="#1-JWT-JSON-Web-Token" class="headerlink" title="1. JWT (JSON Web Token)"></a>1. JWT (JSON Web Token)</h2><p>JWT 是一种建立在 JSON 上的验证方式，目的是通过发放 token，让API资源被信任的用户访问。JWT 最大的特点是无状态，服务器创建 token 并返回给浏览器后，浏览器之后的访问都要带上这个 token，服务器并不存储 token 的信息，所以在分布式服务和大规模用户访问上更有优势。</p>
 <p>具体可参考阮一峰老师对<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">JWT</a>的介绍, 下面主要谈一下登录保持。</p>
+<a id="more"></a>
 <h2 id="2-登录保持"><a href="#2-登录保持" class="headerlink" title="2. 登录保持"></a>2. 登录保持</h2><h3 id="2-1-需求"><a href="#2-1-需求" class="headerlink" title="2.1 需求"></a>2.1 需求</h3><blockquote>
 <p>用户通过帐号和密码登录，登录后在很长一段时间（e.g. 3天）内可以保持登录状态。即使用户关闭浏览器后，在若干小时后打开页面依然可以直接进入服务，而不需要重新登录。当用户隔较长时间（e.g. &gt;3天）未登录时，再次登录需要重新输入帐号和密码。</p>
 </blockquote>
@@ -89,119 +189,885 @@
 <p>为了简化表述，存储改为在内存中存储，生产环境中请使用数据库</p>
 </blockquote>
 <p>启动一个 nodejs 服务器，这里使用Koa框架。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> Koa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'koa'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Koa();</span><br><span class="line">app.listen(<span class="hljs-number">3000</span>);</span><br></pre></td></tr></table></figure>
 <p>初始化登录路由，获得用户名和密码后，向浏览器发放accessToken和refreshToken。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 下面是增加的代码 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)</span><br><span class="line"><span class="keyword">const</span> jwt = <span class="built_in">require</span>(<span class="string">'jsonwebtoken'</span>);</span><br><span class="line"><span class="keyword">const</span> jwtKoa = <span class="built_in">require</span>(<span class="string">'koa-jwt'</span>);</span><br><span class="line"><span class="keyword">let</span> randtoken = <span class="built_in">require</span>(<span class="string">'rand-token'</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> verify = util.promisify(jwt.verify);</span><br><span class="line"><span class="keyword">let</span> refreshTokens = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">const</span> secret = <span class="string">'jwt_demo'</span>;</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line">app.use(bodyParser());</span><br><span class="line">app.use(jwtKoa(&#123;secret&#125;).unless(&#123;</span><br><span class="line">    path: [<span class="regexp">/^\/api\/login/</span>, /^\/api\/token/] <span class="comment">/* 排除/api/login 路径 和/api/token 路径 */</span></span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">'/api/login'</span>, <span class="keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> user = ctx.request.body;</span><br><span class="line">    <span class="keyword">if</span> (user &amp;&amp; user.name) &#123;</span><br><span class="line">        <span class="keyword">let</span> info = &#123;</span><br><span class="line">            name: user.name</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> accessToken = jwt.sign(info, secret, &#123; <span class="attr">expiresIn</span>: <span class="string">'15m'</span>&#125;); <span class="comment">/* 生成accessToken，有效期为15分钟 */</span></span><br><span class="line">        <span class="keyword">const</span> refreshToken = randtoken.uid(<span class="number">16</span>); <span class="comment">/* 获取16位refreshToken */</span></span><br><span class="line">        refreshTokens.set(refreshToken, user.name);</span><br><span class="line">        ctx.response.body = &#123;</span><br><span class="line">            accessToken: accessToken,</span><br><span class="line">            refreshToken: refreshToken</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 新增代码到此结束 */</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> Koa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'koa'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* 下面是增加的代码 */</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'koa-bodyparser'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> Router = <span class="hljs-built_in">require</span>(<span class="hljs-string">'koa-router'</span>)</span><br><span class="line"><span class="hljs-keyword">const</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jsonwebtoken'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> jwtKoa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'koa-jwt'</span>);</span><br><span class="line"><span class="hljs-keyword">let</span> randtoken = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rand-token'</span>);</span><br><span class="line"><span class="hljs-keyword">const</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> verify = util.promisify(jwt.verify);</span><br><span class="line"><span class="hljs-keyword">let</span> refreshTokens = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();</span><br><span class="line"><span class="hljs-keyword">const</span> secret = <span class="hljs-string">'jwt_demo'</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line">app.use(bodyParser());</span><br><span class="line">app.use(jwtKoa(&#123;secret&#125;).unless(&#123;</span><br><span class="line">    path: [<span class="hljs-regexp">/^\/api\/login/</span>, /^\/api\/token/] <span class="hljs-comment">/* 排除/api/login 路径 和/api/token 路径 */</span></span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">router.post(<span class="hljs-string">'/api/login'</span>, <span class="hljs-keyword">async</span>(ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> user = ctx.request.body;</span><br><span class="line">    <span class="hljs-keyword">if</span> (user &amp;&amp; user.name) &#123;</span><br><span class="line">        <span class="hljs-keyword">let</span> info = &#123;</span><br><span class="line">            name: user.name</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">const</span> accessToken = jwt.sign(info, secret, &#123; <span class="hljs-attr">expiresIn</span>: <span class="hljs-string">'15m'</span>&#125;); <span class="hljs-comment">/* 生成accessToken，有效期为15分钟 */</span></span><br><span class="line">        <span class="hljs-keyword">const</span> refreshToken = randtoken.uid(<span class="hljs-number">16</span>); <span class="hljs-comment">/* 获取16位refreshToken */</span></span><br><span class="line">        refreshTokens.set(refreshToken, user.name);</span><br><span class="line">        ctx.response.body = &#123;</span><br><span class="line">            accessToken: accessToken,</span><br><span class="line">            refreshToken: refreshToken</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(router.routes())</span><br><span class="line">    .use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* 新增代码到此结束 */</span></span><br><span class="line">app.listen(<span class="hljs-number">3000</span>);</span><br></pre></td></tr></table></figure>
 <p>初始化accessToken刷新路由。浏览器发送refreshToken，服务器验证如果map中持有该refreshToken且对应的username与发送过来的username匹配，那么就发送新的token。否则返回401错误状态。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">router.post(<span class="string">'/api/token'</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> username = ctx.request.body.name;</span><br><span class="line">    <span class="keyword">const</span> refreshToken = ctx.request.body.refreshToken;</span><br><span class="line">    <span class="keyword">if</span> (refreshTokens.has(refreshToken) &amp;&amp; refreshTokens.get(refreshToken) === username) &#123;</span><br><span class="line">        <span class="keyword">let</span> info = &#123;</span><br><span class="line">            name: username</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">let</span> accessToken = jwt.sign(info, secret, &#123; <span class="attr">expiresIn</span>: <span class="string">'15m'</span> &#125;);</span><br><span class="line">        ctx.body = &#123;</span><br><span class="line">            accessToken: accessToken</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">/* 401 没有权限访问，需要重新登录 */</span></span><br><span class="line">        ctx.throw(<span class="number">401</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">router.post(<span class="hljs-string">'/api/token'</span>, <span class="hljs-keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> username = ctx.request.body.name;</span><br><span class="line">    <span class="hljs-keyword">const</span> refreshToken = ctx.request.body.refreshToken;</span><br><span class="line">    <span class="hljs-keyword">if</span> (refreshTokens.has(refreshToken) &amp;&amp; refreshTokens.get(refreshToken) === username) &#123;</span><br><span class="line">        <span class="hljs-keyword">let</span> info = &#123;</span><br><span class="line">            name: username</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="hljs-keyword">let</span> accessToken = jwt.sign(info, secret, &#123; <span class="hljs-attr">expiresIn</span>: <span class="hljs-string">'15m'</span> &#125;);</span><br><span class="line">        ctx.body = &#123;</span><br><span class="line">            accessToken: accessToken</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">/* 401 没有权限访问，需要重新登录 */</span></span><br><span class="line">        ctx.throw(<span class="hljs-number">401</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>初始化一个保护的资源访问路径</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/api/secret'</span>, <span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">	<span class="keyword">const</span> token = ctx.header.authorization; <span class="comment">/* 获得accessToken */</span></span><br><span class="line">    <span class="keyword">if</span> (token) &#123;</span><br><span class="line">        <span class="keyword">let</span> accessToken = token.split(<span class="string">' '</span>)[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">let</span> accessPayload = <span class="keyword">await</span> verify(accessToken, secret); <span class="comment">/* 解密，获取accessPayload */</span></span><br><span class="line">        ctx.body = <span class="string">"It's a secret."</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ctx.body = &#123;</span><br><span class="line">            message: <span class="string">'token 错误'</span>,</span><br><span class="line">            code: <span class="number">-1</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="hljs-string">'/api/secret'</span>, <span class="hljs-keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">	<span class="hljs-keyword">const</span> token = ctx.header.authorization; <span class="hljs-comment">/* 获得accessToken */</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (token) &#123;</span><br><span class="line">        <span class="hljs-keyword">let</span> accessToken = token.split(<span class="hljs-string">' '</span>)[<span class="hljs-number">1</span>];</span><br><span class="line">        <span class="hljs-keyword">let</span> accessPayload = <span class="hljs-keyword">await</span> verify(accessToken, secret); <span class="hljs-comment">/* 解密，获取accessPayload */</span></span><br><span class="line">        ctx.body = <span class="hljs-string">"It's a secret."</span>;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        ctx.body = &#123;</span><br><span class="line">            message: <span class="hljs-string">'token 错误'</span>,</span><br><span class="line">            code: <span class="hljs-number">-1</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="2-4-验证"><a href="#2-4-验证" class="headerlink" title="2.4 验证"></a>2.4 验证</h3><ol>
 <li><p>用name登录，获取一个accessToken</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="_">-d</span> <span class="string">"name=foo"</span> http://127.0.0.1:3000/api/login</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="hljs-_">-d</span> <span class="hljs-string">"name=foo"</span> http://127.0.0.1:3000/api/login</span><br></pre></td></tr></table></figure>
 <p>返回值如下（不一定全部相同）：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"accessToken"</span>:<span class="string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span>,<span class="attr">"refreshToken"</span>:<span class="string">"SPeAsKMcbHqjBrQ5"</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="hljs-attr">"accessToken"</span>:<span class="hljs-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span>,<span class="hljs-attr">"refreshToken"</span>:<span class="hljs-string">"SPeAsKMcbHqjBrQ5"</span>&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>不带token访问保护资源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  http://127.0.0.1:3000/api/secret</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  http://127.0.0.1:3000/api/secret</span><br></pre></td></tr></table></figure>
 <p>返回值如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authentication Error</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authentication Error</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>带token访问保护资源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span> http://127.0.0.1:3000/api/secret</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span> http://127.0.0.1:3000/api/secret</span><br></pre></td></tr></table></figure>
 <p>返回值如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It&apos;s a secret.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">It&apos;s a secret.</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>15分钟后带token访问保护资源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span> http://127.0.0.1:3000/api/secret</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEyNTg0LCJleHAiOjE1MzMwMTI2NDR9.ch_APWPnCmZru_8uKNxAH4I68lLf46oVNU3rqdGs8LE"</span> http://127.0.0.1:3000/api/secret</span><br></pre></td></tr></table></figure>
 <p>返回值如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authentication Error</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authentication Error</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>用refreshToken换accessToken</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="_">-d</span> <span class="string">"name=foo&amp;refreshToken=3VqXxVFaFequGZEt"</span> http://127.0.0.1:3000/api/token</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="hljs-_">-d</span> <span class="hljs-string">"name=foo&amp;refreshToken=3VqXxVFaFequGZEt"</span> http://127.0.0.1:3000/api/token</span><br></pre></td></tr></table></figure>
 <p>返回值如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"accessToken"</span>:<span class="string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEzNzIwLCJleHAiOjE1MzMwMTQ2MjB9.5-w9P4AY033GaW77azsd6-mBMOxMMIhaqgMph_tOHpw"</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="hljs-attr">"accessToken"</span>:<span class="hljs-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZm9vIiwiaWF0IjoxNTMzMDEzNzIwLCJleHAiOjE1MzMwMTQ2MjB9.5-w9P4AY033GaW77azsd6-mBMOxMMIhaqgMph_tOHpw"</span>&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>refreshToken的失效可以通过数据库的updateTime来判断，如果currentTime - updateTime &gt; 3day，那么就不派发新的accessToken，并且删除旧的refreshToken记录，要求重新登录。</p>
 </li>
 </ol>
 <h3 id="2-5-改进"><a href="#2-5-改进" class="headerlink" title="2.5 改进"></a>2.5 改进</h3><p>每次都要在请求头中加入token，不方便。accessToken失效，需要手动换取新的accessToken，也不方便。</p>
 <p>因此最好有一种代理机制，能在每次发请求和收到请求时做一些处理。下面使用axios的请求拦截器来实现。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cdn 引入：  </span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/vue"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">npm 引入:</span><br><span class="line">npm install vue</span><br><span class="line">npm install axios</span><br></pre></td></tr></table></figure>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cdn 引入：  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/vue"</span>&gt;</span><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;</span><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">npm 引入:</span><br><span class="line">npm install vue</span><br><span class="line">npm install axios</span><br></pre></td></tr></table></figure>
 <p>请求拦截，添加Authorization。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (localStorage.accessToken) &#123;</span><br><span class="line">   	config.headers.Authorization = <span class="string">'Beared '</span> + localStorage.accessToken;</span><br><span class="line">  	&#125;</span><br><span class="line">   <span class="keyword">return</span> config;</span><br><span class="line">&#125;, err =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.request.use(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (localStorage.accessToken) &#123;</span><br><span class="line">   	config.headers.Authorization = <span class="hljs-string">'Beared '</span> + localStorage.accessToken;</span><br><span class="line">  	&#125;</span><br><span class="line">   <span class="hljs-keyword">return</span> config;</span><br><span class="line">&#125;, err =&gt; &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>响应拦截，处理token刷新</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.response.use(<span class="keyword">async</span> res =&gt; &#123;</span><br><span class="line">	<span class="comment">/* 处理token过期 */</span></span><br><span class="line">    <span class="comment">/* 如果code === -1，表示token无效，需要刷新 */</span></span><br><span class="line">	<span class="keyword">if</span> (res.data.code === <span class="number">-1</span>) &#123;</span><br><span class="line">		<span class="keyword">await</span> axios.post(<span class="string">'/api/token'</span>, &#123;</span><br><span class="line">			name: localStorage.username ? localStorage.username : <span class="string">''</span>,</span><br><span class="line">			refreshToken: localStorage.refreshToken ? 													localStorage.refreshToken : <span class="string">''</span></span><br><span class="line">		&#125;).then(<span class="keyword">async</span> res2 =&gt; &#123;</span><br><span class="line">            <span class="comment">/* 将返回的新token存起来 */</span></span><br><span class="line">			localStorage.setItem(<span class="string">'accessToken'</span>, res2.data.accessToken);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">/* 再次发送之前因为token过期而失败的请求 */</span></span><br><span class="line">			<span class="keyword">let</span> &#123; method, url, data &#125; = res.config;</span><br><span class="line">			<span class="keyword">await</span> axios[method](url, data).then(<span class="function">(<span class="params">res3</span>)=&gt;</span> &#123;</span><br><span class="line">				res = res3; <span class="comment">/* 将失败的请求响应换成成功的请求响应 */</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">this</span>.authenticated = <span class="literal">false</span>; <span class="comment">/* 如果refreshToken也失败，那就要重新登录 */</span></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptors.response.use(<span class="hljs-keyword">async</span> res =&gt; &#123;</span><br><span class="line">	<span class="hljs-comment">/* 处理token过期 */</span></span><br><span class="line">    <span class="hljs-comment">/* 如果code === -1，表示token无效，需要刷新 */</span></span><br><span class="line">	<span class="hljs-keyword">if</span> (res.data.code === <span class="hljs-number">-1</span>) &#123;</span><br><span class="line">		<span class="hljs-keyword">await</span> axios.post(<span class="hljs-string">'/api/token'</span>, &#123;</span><br><span class="line">			name: localStorage.username ? localStorage.username : <span class="hljs-string">''</span>,</span><br><span class="line">			refreshToken: localStorage.refreshToken ? 													localStorage.refreshToken : <span class="hljs-string">''</span></span><br><span class="line">		&#125;).then(<span class="hljs-keyword">async</span> res2 =&gt; &#123;</span><br><span class="line">            <span class="hljs-comment">/* 将返回的新token存起来 */</span></span><br><span class="line">			localStorage.setItem(<span class="hljs-string">'accessToken'</span>, res2.data.accessToken);</span><br><span class="line">            </span><br><span class="line">            <span class="hljs-comment">/* 再次发送之前因为token过期而失败的请求 */</span></span><br><span class="line">			<span class="hljs-keyword">let</span> &#123; method, url, data &#125; = res.config;</span><br><span class="line">			<span class="hljs-keyword">await</span> axios[method](url, data).then(<span class="hljs-function">(<span class="hljs-params">res3</span>)=&gt;</span> &#123;</span><br><span class="line">				res = res3; <span class="hljs-comment">/* 将失败的请求响应换成成功的请求响应 */</span></span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;).catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="hljs-keyword">this</span>.authenticated = <span class="hljs-literal">false</span>; <span class="hljs-comment">/* 如果refreshToken也失败，那就要重新登录 */</span></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> res;</span><br><span class="line">&#125;, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">error</span>) </span>&#123;</span><br><span class="line"><span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>Vue 文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        username: <span class="string">''</span>,</span><br><span class="line">        password: <span class="string">''</span>,</span><br><span class="line">        authenticated: <span class="literal">true</span>,</span><br><span class="line">        secret: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">    login() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; username, password &#125; = <span class="keyword">this</span>;</span><br><span class="line">        axios.post(<span class="string">'/api/login'</span>, &#123;</span><br><span class="line">            name: username</span><br><span class="line">        &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            localStorage.setItem(<span class="string">'username'</span>, <span class="keyword">this</span>.username);</span><br><span class="line">            localStorage.setItem(<span class="string">'accessToken'</span>, res.data.accessToken);</span><br><span class="line">            localStorage.setItem(<span class="string">'refreshToken'</span>, res.data.refreshToken);</span><br><span class="line">            <span class="keyword">this</span>.authenticated = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">this</span>.getSecret();</span><br><span class="line">        &#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    getSecret() &#123;</span><br><span class="line">        axios.get(<span class="string">'/api/secret'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.secret = res.data</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</section>
-        </article>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">        username: <span class="hljs-string">''</span>,</span><br><span class="line">        password: <span class="hljs-string">''</span>,</span><br><span class="line">        authenticated: <span class="hljs-literal">true</span>,</span><br><span class="line">        secret: <span class="hljs-string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">    login() &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> &#123; username, password &#125; = <span class="hljs-keyword">this</span>;</span><br><span class="line">        axios.post(<span class="hljs-string">'/api/login'</span>, &#123;</span><br><span class="line">            name: username</span><br><span class="line">        &#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;</span><br><span class="line">            localStorage.setItem(<span class="hljs-string">'username'</span>, <span class="hljs-keyword">this</span>.username);</span><br><span class="line">            localStorage.setItem(<span class="hljs-string">'accessToken'</span>, res.data.accessToken);</span><br><span class="line">            localStorage.setItem(<span class="hljs-string">'refreshToken'</span>, res.data.refreshToken);</span><br><span class="line">            <span class="hljs-keyword">this</span>.authenticated = <span class="hljs-literal">true</span>;</span><br><span class="line">            <span class="hljs-keyword">this</span>.getSecret();</span><br><span class="line">        &#125;).catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="hljs-built_in">console</span>.log(err);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    getSecret() &#123;</span><br><span class="line">        axios.get(<span class="hljs-string">'/api/secret'</span>).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">this</span>.secret = res.data</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/javascript/">javascript</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/10/19/JavaScript测试/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">JavaScript测试</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2017/12/27/2017/">
+                <span class="level-item">2017</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
 </div>
-<footer style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 200;">
-    <div class="footer-container" style="width: 100%; text-align: center; color: #6e6f6d; height: 50px; line-height: 50px; font-family: 'Abel', sans-serif">
-        lioder © 2018 Time Lapse
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://avatars2.githubusercontent.com/u/20789674?s=460&amp;v=4" alt="lioder">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        lioder
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        TimeLapse
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>南京</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/lioder" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/lioder">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://weibo.com/lioder/home">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/05/07/microservice1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-07T12:07:45.000Z">2019-05-07</time></div>
+                    <a href="/2019/05/07/microservice1/" class="has-link-black-ter is-size-6">微服务从0开始</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/04/Vue-diff-算法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-diff-算法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time></div>
+                    <a href="/2019/03/04/Vue-diff-算法/" class="has-link-black-ter is-size-6">Vue-diff-算法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/19/JavaScript测试/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JavaScript测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time></div>
+                    <a href="/2018/10/19/JavaScript测试/" class="has-link-black-ter is-size-6">JavaScript测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/31/JWT/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
+                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/27/2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
+                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Microservice/">
+                        <span class="tag">Microservice</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随想/">
+                        <span class="tag">随想</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/05/07/microservice1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-07T12:07:45.000Z">2019-05-07</time></div>
+                    <a href="/2019/05/07/microservice1/" class="has-link-black-ter is-size-6">微服务从0开始</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/04/Vue-diff-算法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-diff-算法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time></div>
+                    <a href="/2019/03/04/Vue-diff-算法/" class="has-link-black-ter is-size-6">Vue-diff-算法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/19/JavaScript测试/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JavaScript测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time></div>
+                    <a href="/2018/10/19/JavaScript测试/" class="has-link-black-ter is-size-6">JavaScript测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/31/JWT/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
+                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/27/2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
+                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Microservice/">
+                        <span class="tag">Microservice</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随想/">
+                        <span class="tag">随想</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="JWT 与 登录保持" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Kry·L&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
     </div>
 </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    function async (u, c) {
-        var d = document, t = 'script',
-            o = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        o.src = u;
-        if (c) {
-            o.addEventListener('load', function (e) {
-                c(null, e);
-            }, false);
-        }
-        s.parentNode.insertBefore(o, s);
-    }
-</script>
-<script>
-    var hasLine = 'false';
-    async("//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js", function () {
-        $('figure pre').each(function (i, block) {
-            var figure = $(this).parents('figure');
-            if (hasLine === 'false') {
-                figure.find('.gutter').hide();
-            }
-            var lang = figure.attr('class').split(' ')[1] || 'code';
-            var codeHtml = $(this).html();
-            var codeTag = document.createElement('code');
-            codeTag.className = lang;
-            codeTag.innerHTML = codeHtml;
-            $(this).attr('class', '').empty().html(codeTag);
-            figure.attr('data-lang', lang.toUpperCase());
-            hljs.highlightBlock(block);
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
         });
-    })
+    });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    let menuIcon = 'menu';
-    feather.replace();
-
-    document.querySelector('.logo').addEventListener('click', () => {
-        location.href = '/';
-        // document.querySelector('.menu-icon').style.display = 'none';
-    })
-    document.querySelector('.icon-wrapper').addEventListener('click', function () {
-        let iconEle = document.querySelector('.menu-icon');
-        if (menuIcon === 'x') {
-            iconEle.dataset.feather = 'menu';
-            menuIcon = 'menu';
-            document.querySelector('.mobile-menu').style.visibility = 'hidden';
-        } else {
-            iconEle.dataset.feather = 'x';
-            menuIcon = 'x';
-            document.querySelector('.mobile-menu').style.visibility = 'visible';
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
         }
-        console.log(menuIcon)
-        feather.replace();
-    })
-
-
+    });
+});
 </script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>

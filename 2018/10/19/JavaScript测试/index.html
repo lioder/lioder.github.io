@@ -1,75 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html  lang="zh">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>Time Lapse</title>
-    <link rel="shortcut icon" href="http://lioder.xyz/css/favicon.ico">
-    <link href='http://fonts.font.im/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet"
-          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/styles/tomorrow.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+<title>JavaScript测试 - Time Lapse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="JavaScript 测试使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript测试">
+<meta property="og:url" content="http://yoursite.com/2018/10/19/JavaScript测试/index.html">
+<meta property="og:site_name" content="Time Lapse">
+<meta property="og:description" content="JavaScript 测试使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-05-29T01:02:05.421Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript测试">
+<meta name="twitter:description" content="JavaScript 测试使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-<header>
-    <div class="header-container">
-        <div class="logo">
-            <span class=title>Time Lapse</span>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="JavaScript测试" height="28">
+            
+            </a>
         </div>
-        <ul class="right-list">
+        <div class="navbar-menu">
             
-                <li class="list-item">
-                    
-                        <a href="/" class="item-link">Home</a>
-                    
-                </li>
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
             
-                <li class="list-item">
-                    
-                        <a href="/about" class="item-link">About</a>
-                    
-                </li>
-            
-        </ul>
-        <div class="icon-wrapper">
-            <i data-feather="menu" class="menu-icon"></i>
-        </div>
-        <div class="mobile-menu" style="visibility: hidden">
-            <ul>
-                <li class="mobile-menu-item"><a href="/">Home</a></li>
-                <li class="mobile-menu-item"><a href="/about">About</a></li>
-            </ul>
+            <div class="navbar-end">
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
         </div>
     </div>
-</header>
-
-<div class="page">
-    <div class="page-container">
-        <article class="page-content">
-            <h3 class="page-title">JavaScript测试</h3>
-            <div class="page-date">Published on 2018-10-19</div>
-            <div class="page-tag">
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time>
                 
                 
-                <div class="tag">
-    <div class="tag-container" style="background-color: #ff9800"># JavaScript</div>
-</div>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 882 个字)
+                </span>
                 
                 
             </div>
-            <section class="markdown-content"><h1 id="JavaScript-测试"><a href="#JavaScript-测试" class="headerlink" title="JavaScript 测试"></a>JavaScript 测试</h1><h2 id="使用-Jest-进行单元测试"><a href="#使用-Jest-进行单元测试" class="headerlink" title="使用 Jest 进行单元测试"></a>使用 Jest 进行单元测试</h2><blockquote>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                JavaScript测试
+            
+        </h1>
+        <div class="content">
+            <h1 id="JavaScript-测试"><a href="#JavaScript-测试" class="headerlink" title="JavaScript 测试"></a>JavaScript 测试</h1><h2 id="使用-Jest-进行单元测试"><a href="#使用-Jest-进行单元测试" class="headerlink" title="使用 Jest 进行单元测试"></a>使用 Jest 进行单元测试</h2><blockquote>
 <p>Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在<code>__tests__</code>文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"jest"</span>: &#123;</span><br><span class="line">    <span class="string">"testRegex"</span>: <span class="string">"(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"jest"</span>: &#123;</span><br><span class="line">    <span class="hljs-string">"testRegex"</span>: <span class="hljs-string">"(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="先来用一下"><a href="#先来用一下" class="headerlink" title="先来用一下"></a>先来用一下</h3><p>首先我们创建一个需要测试的模块 <code>divide.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">divide</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = divide;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">divide</span> (<span class="hljs-params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = divide;</span><br></pre></td></tr></table></figure>
 <p>接着我们创建测试文件 <code>divide.test.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> divide = <span class="built_in">require</span>(<span class="string">'./divide'</span>)</span><br><span class="line"></span><br><span class="line">test(<span class="string">'dividing 6 by 3 equals 2'</span>, () =&gt; &#123;</span><br><span class="line">    expect(divide(<span class="number">6</span>, <span class="number">3</span>)).toBe(<span class="number">2</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> divide = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./divide'</span>)</span><br><span class="line"></span><br><span class="line">test(<span class="hljs-string">'dividing 6 by 3 equals 2'</span>, () =&gt; &#123;</span><br><span class="line">    expect(divide(<span class="hljs-number">6</span>, <span class="hljs-number">3</span>)).toBe(<span class="hljs-number">2</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>记得安装 Jest 模块<code>npm install Jest</code>并在<code>package.json</code>中加入Jest的运行脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;jest&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;jest&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后，用<code>npm run test</code>来运行测试，可以看到以下结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PASS  ./divide.test.js</span><br><span class="line"> ✓ dividing 6 by 3 equals 2 (5ms)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PASS  ./divide.test.js</span><br><span class="line"> ✓ dividing 6 by 3 equals 2 (5ms)</span><br></pre></td></tr></table></figure>
 <h3 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h3><p>test函数接受三个参数，分别是：</p>
 <ul>
 <li>测试名称</li>
@@ -78,106 +178,872 @@
 </ul>
 <p>expect函数接受一个想要测试的值，并与 matcher 函数的参数比较。在本例中，想要测试的值是 divide 函数的返回值，matcher 函数是 toBe。详细的 matcher 函数可参考 <a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">Jest 的文档</a>。</p>
 <h3 id="聚合测试"><a href="#聚合测试" class="headerlink" title="聚合测试"></a>聚合测试</h3><p>在一个文件中可能存在多个测试。我们可以使用 <strong>describe</strong>函数来聚合它们，让代码看起来更简洁，也可以更好的定位错误</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// group-tests.test.js</span></span><br><span class="line">describe(<span class="string">'test the random function'</span>, ()=&gt; &#123;</span><br><span class="line">    it(<span class="string">'the type of return value should be number'</span>, () =&gt; &#123;</span><br><span class="line">        expect(<span class="keyword">typeof</span> <span class="built_in">Math</span>.random()).toEqual(<span class="string">'number'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    it(<span class="string">'the return value is between 0 and 1'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> n = <span class="built_in">Math</span>.random();</span><br><span class="line">        expect(n).toBeGreaterThanOrEqual(<span class="number">0</span>)</span><br><span class="line">        expect(n).toBeLessThan(<span class="number">1</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// group-tests.test.js</span></span><br><span class="line">describe(<span class="hljs-string">'test the random function'</span>, ()=&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'the type of return value should be number'</span>, () =&gt; &#123;</span><br><span class="line">        expect(<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Math</span>.random()).toEqual(<span class="hljs-string">'number'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    it(<span class="hljs-string">'the return value is between 0 and 1'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">let</span> n = <span class="hljs-built_in">Math</span>.random();</span><br><span class="line">        expect(n).toBeGreaterThanOrEqual(<span class="hljs-number">0</span>)</span><br><span class="line">        expect(n).toBeLessThan(<span class="hljs-number">1</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>it 是 test 的别名</p>
 </blockquote>
 <p>假如我们将 <code>expect(n).toBeGreaterThanOrEqual(0)</code> 改成 <code>expect(n).toBeGreaterThanOrEqual(0)</code>，有概率会得到以下错误提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FAIL  ./grouping-tests.test.js</span><br><span class="line"> ● test the random function › the return value is between 0 and 1</span><br><span class="line"></span><br><span class="line">   expect(received).toBeGreaterThanOrEqual(expected)</span><br><span class="line"></span><br><span class="line">   Expected: 0.5</span><br><span class="line">   Received: 0.42696381528118543</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FAIL  ./grouping-tests.test.js</span><br><span class="line"> ● test the random function › the return value is between 0 and 1</span><br><span class="line"></span><br><span class="line">   expect(received).toBeGreaterThanOrEqual(expected)</span><br><span class="line"></span><br><span class="line">   Expected: 0.5</span><br><span class="line">   Received: 0.42696381528118543</span><br></pre></td></tr></table></figure>
 <h2 id="使用-Enzyme-测试-React-组件"><a href="#使用-Enzyme-测试-React-组件" class="headerlink" title="使用 Enzyme 测试 React 组件"></a>使用 Enzyme 测试 React 组件</h2><p>首先安装 Enzyme 和 React</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install enzyme</span><br><span class="line">npm install react</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install enzyme</span><br><span class="line">npm install react</span><br></pre></td></tr></table></figure>
 <p>接着安装 enzyme 的适配器。我们要使用 React 16.x 版本，所以安装 enzyme-adapter-react-16</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install enzyme-adapter-react-16</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install enzyme-adapter-react-16</span><br></pre></td></tr></table></figure>
 <p>然后创建配置文件 <code>setupTests.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;configure&#125; <span class="keyword">from</span> <span class="string">'enzyme'</span></span><br><span class="line"><span class="keyword">import</span> Adapter <span class="keyword">from</span> <span class="string">'enzyme-adapter-react-16'</span></span><br><span class="line"></span><br><span class="line">configure(&#123;<span class="attr">adapter</span>: <span class="keyword">new</span> Adapter()&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123;configure&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span></span><br><span class="line"><span class="hljs-keyword">import</span> Adapter <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme-adapter-react-16'</span></span><br><span class="line"></span><br><span class="line">configure(&#123;<span class="hljs-attr">adapter</span>: <span class="hljs-keyword">new</span> Adapter()&#125;);</span><br></pre></td></tr></table></figure>
 <p>最后在<code>package.json</code>中配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;jest&quot;: &#123;</span><br><span class="line">	&quot;setupTestFrameworkScriptFile&quot;: &quot;&lt;rootDir&gt;/enzyme/setupTests.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;jest&quot;: &#123;</span><br><span class="line">	&quot;setupTestFrameworkScriptFile&quot;: &quot;&lt;rootDir&gt;/enzyme/setupTests.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="浅渲染"><a href="#浅渲染" class="headerlink" title="浅渲染"></a>浅渲染</h3><p>Enzyme 的 shallow 函数只渲染父组件，因此称为浅渲染。浅渲染保证被测试的组件不会受到其他组件的干扰。</p>
 <p>首先创建一个组件 App.js</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">const</span> App = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Hello, world!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;</span><br></pre></td></tr></table></figure>
 <p>然后创建测试文件</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; shallow &#125; <span class="keyword">from</span> <span class="string">'enzyme'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'app component'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="string">'constains a header with the "Hello, world!"'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> app = shallow(<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span>);</span></span><br><span class="line"><span class="xml">        expect(app.containsMatchingElement(<span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">div</span>&gt;</span>)).toEqual(true);</span></span><br><span class="line"><span class="xml">    &#125;)</span></span><br><span class="line"><span class="xml">&#125;)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> &#123; shallow &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./App'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'app component'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'constains a header with the "Hello, world!"'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> app = shallow(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>);</span></span><br><span class="line"><span class="hljs-xml">        expect(app.containsMatchingElement(<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Hello, world!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>)).toEqual(true);</span></span><br><span class="line"><span class="hljs-xml">    &#125;)</span></span><br><span class="line"><span class="hljs-xml">&#125;)</span></span><br></pre></td></tr></table></figure>
 <p>然后我们运行测试，就可以看到以下结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PASS  jest/grouping-tests.test.js</span><br><span class="line">PASS  jest/divide.test.js</span><br><span class="line">PASS  enzyme/App.test.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PASS  jest/grouping-tests.test.js</span><br><span class="line">PASS  jest/divide.test.js</span><br><span class="line">PASS  enzyme/App.test.js</span><br></pre></td></tr></table></figure>
 <p>在这里，Jest 扮演了测试驱动器的作用。接下来看看 Enzyme 在更复杂的组件场景下的使用。</p>
 <p>首先创建组件 <code>TodoList.js</code></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TodoList = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.tasks.map(<span class="function">(<span class="params">task, idx</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;idx&#125;</span>&gt;</span>&#123;task&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">export default TodoList;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> TodoList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.tasks.map(<span class="hljs-function">(<span class="hljs-params">task, idx</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">return</span> (<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;idx&#125;</span>&gt;</span>&#123;task&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/ul&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp">export default TodoList;</span></span><br></pre></td></tr></table></figure>
 <p>然后创建测试文件<code>TodoList.test.js</code></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123;shallow&#125; <span class="keyword">from</span> <span class="string">'enzyme'</span></span><br><span class="line"><span class="keyword">import</span> TodoList <span class="keyword">from</span> <span class="string">'./TodoList'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'when provide tasks props'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="string">'contains same number of &lt;li&gt; Elements'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> tasks = [<span class="string">'eat food'</span>, <span class="string">'wash hands'</span>, <span class="string">'sleep'</span>];</span><br><span class="line">        <span class="keyword">const</span> todoList = shallow(<span class="xml"><span class="tag">&lt;<span class="name">TodoList</span> <span class="attr">tasks</span>=<span class="string">&#123;tasks&#125;/</span>&gt;</span>);</span></span><br><span class="line"><span class="xml">        expect(todoList.find('li').length).toEqual(tasks.length)</span></span><br><span class="line"><span class="xml">    &#125;)</span></span><br><span class="line"><span class="xml">&#125;)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123;shallow&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span></span><br><span class="line"><span class="hljs-keyword">import</span> TodoList <span class="hljs-keyword">from</span> <span class="hljs-string">'./TodoList'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'when provide tasks props'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'contains same number of &lt;li&gt; Elements'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> tasks = [<span class="hljs-string">'eat food'</span>, <span class="hljs-string">'wash hands'</span>, <span class="hljs-string">'sleep'</span>];</span><br><span class="line">        <span class="hljs-keyword">const</span> todoList = shallow(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">tasks</span>=<span class="hljs-string">&#123;tasks&#125;/</span>&gt;</span>);</span></span><br><span class="line"><span class="hljs-xml">        expect(todoList.find('li').length).toEqual(tasks.length)</span></span><br><span class="line"><span class="hljs-xml">    &#125;)</span></span><br><span class="line"><span class="hljs-xml">&#125;)</span></span><br></pre></td></tr></table></figure>
 <p>运行测试后，可以看到测试全部通过。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://wanago.io/2018/09/03/javascript-testing-tutorial-part-two-introducing-enzyme-and-testing-react-components/" target="_blank" rel="noopener">JavaScript Test Tutorial</a></li>
 <li><a href="https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md" target="_blank" rel="noopener">Shallow Rendering API</a></li>
 <li><a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">Jest 的文档</a></li>
 </ul>
-</section>
-        </article>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/JavaScript/">JavaScript</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/04/Vue-diff-算法/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Vue-diff-算法</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/07/31/JWT/">
+                <span class="level-item">JWT 与 登录保持</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
 </div>
-<footer style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 200;">
-    <div class="footer-container" style="width: 100%; text-align: center; color: #6e6f6d; height: 50px; line-height: 50px; font-family: 'Abel', sans-serif">
-        lioder © 2018 Time Lapse
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="https://avatars2.githubusercontent.com/u/20789674?s=460&amp;v=4" alt="lioder">
+                        </figure>
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        lioder
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        TimeLapse
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>南京</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        7
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/lioder" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/lioder">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://weibo.com/lioder/home">
+                
+                <i class="fab fa-weibo"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/05/07/microservice1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-07T12:07:45.000Z">2019-05-07</time></div>
+                    <a href="/2019/05/07/microservice1/" class="has-link-black-ter is-size-6">微服务从0开始</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/04/Vue-diff-算法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-diff-算法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time></div>
+                    <a href="/2019/03/04/Vue-diff-算法/" class="has-link-black-ter is-size-6">Vue-diff-算法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/19/JavaScript测试/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JavaScript测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time></div>
+                    <a href="/2018/10/19/JavaScript测试/" class="has-link-black-ter is-size-6">JavaScript测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/31/JWT/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
+                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/27/2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
+                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Microservice/">
+                        <span class="tag">Microservice</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随想/">
+                        <span class="tag">随想</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/05/07/microservice1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-07T12:07:45.000Z">2019-05-07</time></div>
+                    <a href="/2019/05/07/microservice1/" class="has-link-black-ter is-size-6">微服务从0开始</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/04/Vue-diff-算法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vue-diff-算法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-04T15:16:20.000Z">2019-03-04</time></div>
+                    <a href="/2019/03/04/Vue-diff-算法/" class="has-link-black-ter is-size-6">Vue-diff-算法</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/19/JavaScript测试/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JavaScript测试">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-19T14:37:49.000Z">2018-10-19</time></div>
+                    <a href="/2018/10/19/JavaScript测试/" class="has-link-black-ter is-size-6">JavaScript测试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/31/JWT/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
+                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2017/12/27/2017/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
+                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JavaScript/">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Microservice/">
+                        <span class="tag">Microservice</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/总结/">
+                        <span class="tag">总结</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/随想/">
+                        <span class="tag">随想</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="JavaScript测试" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Kry·L&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
     </div>
 </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
 <script>
-    function async (u, c) {
-        var d = document, t = 'script',
-            o = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        o.src = u;
-        if (c) {
-            o.addEventListener('load', function (e) {
-                c(null, e);
-            }, false);
-        }
-        s.parentNode.insertBefore(o, s);
-    }
-</script>
-<script>
-    var hasLine = 'false';
-    async("//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js", function () {
-        $('figure pre').each(function (i, block) {
-            var figure = $(this).parents('figure');
-            if (hasLine === 'false') {
-                figure.find('.gutter').hide();
-            }
-            var lang = figure.attr('class').split(' ')[1] || 'code';
-            var codeHtml = $(this).html();
-            var codeTag = document.createElement('code');
-            codeTag.className = lang;
-            codeTag.innerHTML = codeHtml;
-            $(this).attr('class', '').empty().html(codeTag);
-            figure.attr('data-lang', lang.toUpperCase());
-            hljs.highlightBlock(block);
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
         });
-    })
+    });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
-    let menuIcon = 'menu';
-    feather.replace();
-
-    document.querySelector('.logo').addEventListener('click', () => {
-        location.href = '/';
-        // document.querySelector('.menu-icon').style.display = 'none';
-    })
-    document.querySelector('.icon-wrapper').addEventListener('click', function () {
-        let iconEle = document.querySelector('.menu-icon');
-        if (menuIcon === 'x') {
-            iconEle.dataset.feather = 'menu';
-            menuIcon = 'menu';
-            document.querySelector('.mobile-menu').style.visibility = 'hidden';
-        } else {
-            iconEle.dataset.feather = 'x';
-            menuIcon = 'x';
-            document.querySelector('.mobile-menu').style.visibility = 'visible';
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
         }
-        console.log(menuIcon)
-        feather.replace();
-    })
-
-
+    });
+});
 </script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>
