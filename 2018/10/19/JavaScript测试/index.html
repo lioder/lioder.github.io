@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="JavaScript 测试使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests">
+    <meta name="description" content="使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests__/.*|(\\.|/)">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript测试">
 <meta property="og:url" content="http://yoursite.com/2018/10/19/JavaScript测试/index.html">
 <meta property="og:site_name" content="Time Lapse">
-<meta property="og:description" content="JavaScript 测试使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests">
+<meta property="og:description" content="使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests__/.*|(\\.|/)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-29T01:02:05.421Z">
+<meta property="og:updated_time" content="2019-06-02T16:56:10.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript测试">
-<meta name="twitter:description" content="JavaScript 测试使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests">
+<meta name="twitter:description" content="使用 Jest 进行单元测试 Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在__tests__文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。  123&quot;jest&quot;: &amp;#123;    &quot;testRegex&quot;: &quot;(/__tests__/.*|(\\.|/)">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -144,7 +144,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 882 个字)
+                    6 分钟 读完 (大约 879 个字)
                 </span>
                 
                 
@@ -157,7 +157,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="JavaScript-测试"><a href="#JavaScript-测试" class="headerlink" title="JavaScript 测试"></a>JavaScript 测试</h1><h2 id="使用-Jest-进行单元测试"><a href="#使用-Jest-进行单元测试" class="headerlink" title="使用 Jest 进行单元测试"></a>使用 Jest 进行单元测试</h2><blockquote>
+            <h2 id="使用-Jest-进行单元测试"><a href="#使用-Jest-进行单元测试" class="headerlink" title="使用 Jest 进行单元测试"></a>使用 Jest 进行单元测试</h2><blockquote>
 <p>Jest 使用正则表达式来判断哪些文件是测试文件。在默认情况下，它会执行在<code>__tests__</code>文件夹下的 .js 和 .jsx 文件，或者是以.test 或 .spec 结尾的文件。可以在 package.json中加入 testRegex 属性来明确。</p>
 </blockquote>
 <figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">"jest"</span>: &#123;</span><br><span class="line">    <span class="hljs-string">"testRegex"</span>: <span class="hljs-string">"(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -194,16 +194,16 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;jest&quot;: &#123;</span><br><span class="line">	&quot;setupTestFrameworkScriptFile&quot;: &quot;&lt;rootDir&gt;/enzyme/setupTests.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="浅渲染"><a href="#浅渲染" class="headerlink" title="浅渲染"></a>浅渲染</h3><p>Enzyme 的 shallow 函数只渲染父组件，因此称为浅渲染。浅渲染保证被测试的组件不会受到其他组件的干扰。</p>
 <p>首先创建一个组件 App.js</p>
-<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Hello, world!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">const</span> App = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> &lt;div&gt;Hello, world!&lt;/div&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;</span><br></pre></td></tr></table></figure>
 <p>然后创建测试文件</p>
-<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> &#123; shallow &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./App'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'app component'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'constains a header with the "Hello, world!"'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> app = shallow(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>);</span></span><br><span class="line"><span class="hljs-xml">        expect(app.containsMatchingElement(<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Hello, world!<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>)).toEqual(true);</span></span><br><span class="line"><span class="hljs-xml">    &#125;)</span></span><br><span class="line"><span class="hljs-xml">&#125;)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> &#123; shallow &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./App'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'app component'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'constains a header with the "Hello, world!"'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> app = shallow(&lt;App /&gt;);</span><br><span class="line">        expect(app.containsMatchingElement(&lt;div&gt;Hello, world!&lt;/div&gt;)).toEqual(true);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>然后我们运行测试，就可以看到以下结果：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PASS  jest/grouping-tests.test.js</span><br><span class="line">PASS  jest/divide.test.js</span><br><span class="line">PASS  enzyme/App.test.js</span><br></pre></td></tr></table></figure>
 <p>在这里，Jest 扮演了测试驱动器的作用。接下来看看 Enzyme 在更复杂的组件场景下的使用。</p>
 <p>首先创建组件 <code>TodoList.js</code></p>
-<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> TodoList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.tasks.map(<span class="hljs-function">(<span class="hljs-params">task, idx</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">return</span> (<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;idx&#125;</span>&gt;</span>&#123;task&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/ul&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp">export default TodoList;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> TodoList = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.tasks.map(<span class="hljs-function">(<span class="hljs-params">task, idx</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">return</span> (&lt;li key=&#123;idx&#125;&gt;&#123;task&#125;&lt;/li&gt;);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;<span class="hljs-regexp">/ul&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp">export default TodoList;</span></span><br></pre></td></tr></table></figure>
 <p>然后创建测试文件<code>TodoList.test.js</code></p>
-<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123;shallow&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span></span><br><span class="line"><span class="hljs-keyword">import</span> TodoList <span class="hljs-keyword">from</span> <span class="hljs-string">'./TodoList'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'when provide tasks props'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'contains same number of &lt;li&gt; Elements'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> tasks = [<span class="hljs-string">'eat food'</span>, <span class="hljs-string">'wash hands'</span>, <span class="hljs-string">'sleep'</span>];</span><br><span class="line">        <span class="hljs-keyword">const</span> todoList = shallow(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TodoList</span> <span class="hljs-attr">tasks</span>=<span class="hljs-string">&#123;tasks&#125;/</span>&gt;</span>);</span></span><br><span class="line"><span class="hljs-xml">        expect(todoList.find('li').length).toEqual(tasks.length)</span></span><br><span class="line"><span class="hljs-xml">    &#125;)</span></span><br><span class="line"><span class="hljs-xml">&#125;)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123;shallow&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'enzyme'</span></span><br><span class="line"><span class="hljs-keyword">import</span> TodoList <span class="hljs-keyword">from</span> <span class="hljs-string">'./TodoList'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="hljs-string">'when provide tasks props'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="hljs-string">'contains same number of &lt;li&gt; Elements'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="hljs-keyword">const</span> tasks = [<span class="hljs-string">'eat food'</span>, <span class="hljs-string">'wash hands'</span>, <span class="hljs-string">'sleep'</span>];</span><br><span class="line">        <span class="hljs-keyword">const</span> todoList = shallow(&lt;TodoList tasks=&#123;tasks&#125;/&gt;);</span><br><span class="line">        expect(todoList.find('li').length).toEqual(tasks.length)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>运行测试后，可以看到测试全部通过。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://wanago.io/2018/09/03/javascript-testing-tutorial-part-two-introducing-enzyme-and-testing-react-components/" target="_blank" rel="noopener">JavaScript Test Tutorial</a></li>
@@ -298,7 +298,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        9
                     </p>
                 </div>
             </div>
@@ -318,7 +318,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        8
                     </p>
                 </div>
             </div>
@@ -371,6 +371,44 @@
         
         <article class="media">
             
+            <a href="/2019/06/03/2019-06-02/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="对生活与爱好的思考">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-02T16:49:29.000Z">2019-06-03</time></div>
+                    <a href="/2019/06/03/2019-06-02/" class="has-link-black-ter is-size-6">对生活与爱好的思考</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/02/hackthon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hackthon 全记录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-02T15:24:35.000Z">2019-06-02</time></div>
+                    <a href="/2019/06/02/hackthon/" class="has-link-black-ter is-size-6">Hackthon 全记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/05/07/microservice1/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
@@ -426,44 +464,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/07/31/JWT/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
-                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2017/12/27/2017/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
-                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -475,6 +475,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -591,8 +602,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/总结/">
-                        <span class="tag">总结</span>
+                    <a class="tags has-addons" href="/tags/生活/">
+                        <span class="tag">生活</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/记录/">
+                        <span class="tag">记录</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -629,6 +647,44 @@
         
         <article class="media">
             
+            <a href="/2019/06/03/2019-06-02/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="对生活与爱好的思考">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-02T16:49:29.000Z">2019-06-03</time></div>
+                    <a href="/2019/06/03/2019-06-02/" class="has-link-black-ter is-size-6">对生活与爱好的思考</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/02/hackthon/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hackthon 全记录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-02T15:24:35.000Z">2019-06-02</time></div>
+                    <a href="/2019/06/02/hackthon/" class="has-link-black-ter is-size-6">Hackthon 全记录</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/05/07/microservice1/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="微服务从0开始">
@@ -684,44 +740,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/07/31/JWT/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JWT 与 登录保持">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-31T05:25:35.000Z">2018-07-31</time></div>
-                    <a href="/2018/07/31/JWT/" class="has-link-black-ter is-size-6">JWT 与 登录保持</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2017/12/27/2017/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2017">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-27T08:05:09.000Z">2017-12-27</time></div>
-                    <a href="/2017/12/27/2017/" class="has-link-black-ter is-size-6">2017</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -733,6 +751,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/05/">
@@ -849,8 +878,15 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/总结/">
-                        <span class="tag">总结</span>
+                    <a class="tags has-addons" href="/tags/生活/">
+                        <span class="tag">生活</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/记录/">
+                        <span class="tag">记录</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
